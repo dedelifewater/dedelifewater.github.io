@@ -263,6 +263,30 @@ nav.nav-visible {
   padding: 2rem;
 }
 
+.hero-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.5rem;
+  display: block;
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 24px var(--jade-glow), 0 0 48px rgba(0,200,150,0.08);
+  opacity: 0;
+  animation: fadeUp 1s ease forwards 0.2s;
+}
+
+.footer-logo-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 0.75rem;
+  display: block;
+  border: 1px solid var(--border);
+  opacity: 0.85;
+}
+
 .hero-eyebrow {
   font-size: 0.7rem;
   letter-spacing: 0.3em;
