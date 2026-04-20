@@ -9,26 +9,6 @@
 </head>
 <body>
 
-  <!-- LEFT SIDEBAR NAV -->
-  <nav class="sidebar">
-    <a href="index.html" class="sidebar-logo">
-      <span class="logo-icon">◈</span>
-      <span class="logo-text">DeDe <span>Lifewater</span></span>
-    </a>
-    <ul class="sidebar-nav">
-      <li><a href="index.html"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></a></li>
-      <li><a href="blog.html"><span class="nav-icon">✦</span><span class="nav-label">Blog</span></a></li>
-      <li><a href="contact.html"><span class="nav-icon">◉</span><span class="nav-label">Contact</span></a></li>
-      <li><a href="newsletter.html"><span class="nav-icon">◈</span><span class="nav-label">Newsletter</span></a></li>
-    </ul>
-    <div class="sidebar-bottom">
-      <a href="mailto:dedelifewater@proton.me">
-        <span class="nav-icon">✉</span>
-        <span class="nav-label">Email</span>
-      </a>
-    </div>
-  </nav>
-
   <!-- MOON TRACKER -->
   <div class="moon-tracker" id="moon-tracker">
     <span class="moon-emoji">🌕</span>
@@ -39,12 +19,10 @@
   </div>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="home">
     <div class="hero-tree">
       <svg viewBox="0 -30 1200 620" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-
         <ellipse class="canopy-glow" cx="600" cy="70" rx="280" ry="60"/>
-
         <g class="tree-canopy">
           <g class="tree-line">
             <path d="M 600 130 Q 520 100 430 70"/>
@@ -60,7 +38,6 @@
             <path d="M 380 110 Q 340 100 310 90"/>
             <path d="M 820 110 Q 860 100 890 90"/>
           </g>
-
           <g>
             <circle class="leaf" cx="360" cy="50" r="2"/>
             <circle class="leaf" cx="400" cy="30" r="1.5"/>
@@ -78,41 +55,30 @@
             <circle class="leaf" cx="480" cy="90" r="1.2"/>
             <circle class="leaf" cx="720" cy="90" r="1.2"/>
           </g>
-
           <circle class="pulse-drop" cx="430" cy="70" r="2" style="animation-delay:0s"/>
           <circle class="pulse-drop" cx="770" cy="70" r="2" style="animation-delay:0.7s"/>
           <circle class="pulse-drop" cx="600" cy="20" r="2" style="animation-delay:1.4s"/>
           <circle class="pulse-drop" cx="380" cy="110" r="2" style="animation-delay:2.1s"/>
           <circle class="pulse-drop" cx="820" cy="110" r="2" style="animation-delay:2.8s"/>
         </g>
-
         <path class="tree-trunk" d="M 600 130 L 600 340"/>
         <g class="tree-line" opacity="0.3">
           <path d="M 596 180 L 596 320" stroke-width="0.5"/>
           <path d="M 604 200 L 604 310" stroke-width="0.5"/>
         </g>
         <text class="trunk-label" x="612" y="245">THE·SOURCE</text>
-
-        <path id="root-1" class="tree-line-bright root-path-1"
-              d="M 600 340 Q 450 400 300 470 Q 200 510 150 590" stroke-width="1.4"/>
-        <path id="root-2" class="tree-line-bright root-path-2"
-              d="M 600 340 Q 540 400 490 450 Q 460 490 450 590" stroke-width="1.4"/>
-        <path id="root-3" class="tree-line-bright root-path-3"
-              d="M 600 340 Q 660 400 710 450 Q 740 490 750 590" stroke-width="1.4"/>
-        <path id="root-4" class="tree-line-bright root-path-4"
-              d="M 600 340 Q 750 400 900 470 Q 1000 510 1050 590" stroke-width="1.6"/>
-
+        <path id="root-1" class="tree-line-bright root-path-1" d="M 600 340 Q 450 400 300 470 Q 200 510 150 590" stroke-width="1.4"/>
+        <path id="root-2" class="tree-line-bright root-path-2" d="M 600 340 Q 540 400 490 450 Q 460 490 450 590" stroke-width="1.4"/>
+        <path id="root-3" class="tree-line-bright root-path-3" d="M 600 340 Q 660 400 710 450 Q 740 490 750 590" stroke-width="1.4"/>
+        <path id="root-4" class="tree-line-bright root-path-4" d="M 600 340 Q 750 400 900 470 Q 1000 510 1050 590" stroke-width="1.6"/>
         <g class="tree-line" opacity="0.4">
           <path d="M 400 440 Q 350 460 320 490"/>
           <path d="M 500 460 Q 510 490 490 510"/>
           <path d="M 700 460 Q 690 490 710 510"/>
           <path d="M 800 440 Q 850 460 880 490"/>
         </g>
-
         <circle cx="600" cy="340" r="3" fill="#1a4a60" opacity="0.9"/>
         <circle cx="600" cy="340" r="9" fill="none" stroke="#1a4a60" stroke-width="0.5" opacity="0.4"/>
-
-        <!-- Droplet 1 — jade -->
         <circle class="drop-1" r="2.5">
           <animateMotion dur="5s" repeatCount="indefinite" begin="0s"><mpath href="#root-1"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5s" repeatCount="indefinite" begin="0s"/>
@@ -121,8 +87,6 @@
           <animateMotion dur="5s" repeatCount="indefinite" begin="2.5s"><mpath href="#root-1"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5s" repeatCount="indefinite" begin="2.5s"/>
         </circle>
-
-        <!-- Droplet 2 — ocean -->
         <circle class="drop-2" r="2.5">
           <animateMotion dur="6s" repeatCount="indefinite" begin="1s"><mpath href="#root-2"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="1s"/>
@@ -131,8 +95,6 @@
           <animateMotion dur="6s" repeatCount="indefinite" begin="4s"><mpath href="#root-2"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="4s"/>
         </circle>
-
-        <!-- Droplet 3 — gold -->
         <circle class="drop-3" r="2.5">
           <animateMotion dur="5.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#root-3"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="0.5s"/>
@@ -141,8 +103,6 @@
           <animateMotion dur="5.5s" repeatCount="indefinite" begin="3s"><mpath href="#root-3"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="3s"/>
         </circle>
-
-        <!-- Droplet 4 — ocean, prominent -->
         <circle class="drop-4" r="3">
           <animateMotion dur="4.5s" repeatCount="indefinite" begin="0.2s"><mpath href="#root-4"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4.5s" repeatCount="indefinite" begin="0.2s"/>
@@ -151,7 +111,6 @@
           <animateMotion dur="4.5s" repeatCount="indefinite" begin="2.2s"><mpath href="#root-4"/></animateMotion>
           <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4.5s" repeatCount="indefinite" begin="2.2s"/>
         </circle>
-
       </svg>
     </div>
     <div class="hero-content">
@@ -165,15 +124,15 @@
         <br />― Bruce Lee
       </p>
       <div class="hero-cta">
-        <a href="blog.html" class="btn-primary">Read the Words</a>
-        <a href="newsletter.html" class="btn-secondary">Join the Current</a>
+        <a href="#writing" class="btn-primary">Read the Words</a>
+        <a href="#connect" class="btn-secondary">Get in Touch</a>
       </div>
     </div>
     <div class="scroll-indicator">Scroll</div>
   </section>
 
   <!-- ABOUT -->
-  <section>
+  <section id="about">
     <div class="about-grid reveal">
       <div class="about-text">
         <span class="section-label">The Current</span>
@@ -189,9 +148,8 @@
           this is a journey told in bars and prose. No shortcuts. No performance.
           Just <strong>the honest current</strong>.
         </p>
-        <a href="blog.html" class="btn-secondary" style="display:inline-block; margin-top: 1.5rem;">Read the Journey</a>
+        <a href="#writing" class="btn-secondary" style="display:inline-block; margin-top: 1.5rem;">Read the Journey</a>
       </div>
-
       <div class="about-pillars">
         <div class="pillar">
           <h4>Flow</h4>
@@ -213,50 +171,38 @@
     </div>
   </section>
 
-  <!-- LATEST BLOG -->
-  <section class="reveal">
+  <!-- WRITING -->
+  <section id="writing" class="reveal">
     <span class="section-label">From the Pages</span>
-    <h2 class="section-title">Latest <span>Writings</span></h2>
+    <h2 class="section-title">Writings &amp; <span>Reflections</span></h2>
     <div class="section-divider"></div>
-
     <div class="cards-grid">
-      <a href="blog.html" class="card">
+      <a href="#" class="card">
         <p class="card-tag">Rap Journey</p>
         <h3>Learning to Flow: Month One on the Mic</h3>
         <p>What happens when you decide to learn rap from scratch? Honest reflections on the first steps, the awkward bars, and what's actually clicking.</p>
-        <div class="card-meta">
-          <span>Apr 2026</span>
-          <span class="card-read-more">Read →</span>
-        </div>
+        <div class="card-meta"><span>Apr 2026</span><span class="card-read-more">Read →</span></div>
       </a>
-
-      <a href="blog.html" class="card">
+      <a href="#" class="card">
         <p class="card-tag">Philosophy</p>
         <h3>Become Like Water: Why Bruce Lee Changed How I See Music</h3>
         <p>The philosophy that named this brand — and how it shapes every creative decision made under the Lifewater name.</p>
-        <div class="card-meta">
-          <span>Apr 2026</span>
-          <span class="card-read-more">Read →</span>
-        </div>
+        <div class="card-meta"><span>Apr 2026</span><span class="card-read-more">Read →</span></div>
       </a>
-
-      <a href="blog.html" class="card">
+      <a href="#" class="card">
         <p class="card-tag">Personal Brand</p>
         <h3>Building Without a Blueprint: The DeDe Lifewater Origin</h3>
         <p>No manager, no label, no roadmap. Just a vision and the tools available. Here's what that actually looks like day to day.</p>
-        <div class="card-meta">
-          <span>Apr 2026</span>
-          <span class="card-read-more">Read →</span>
-        </div>
+        <div class="card-meta"><span>Apr 2026</span><span class="card-read-more">Read →</span></div>
       </a>
     </div>
   </section>
 
-  <!-- NEWSLETTER CTA -->
-  <div class="newsletter-section reveal">
+  <!-- NEWSLETTER -->
+  <div class="newsletter-section reveal" id="newsletter">
     <span class="section-label">Stay in the Current</span>
     <h2 class="section-title" style="text-align:center;">Join the <span>Lifewater</span> List</h2>
-    <p>New writing, music drops, and the honest documentation of building something real. No spam — just the current.</p>
+    <p>New writing, drops, and the honest documentation of building something real. No spam — just the current.</p>
     <form class="newsletter-form" onsubmit="return false;">
       <input type="email" placeholder="your@email.com" />
       <button type="submit">Join</button>
@@ -264,15 +210,84 @@
     <p class="newsletter-note">No spam. Unsubscribe anytime. Your information stays private.</p>
   </div>
 
+  <!-- CONTACT -->
+  <section id="connect" class="reveal">
+    <span class="section-label">Connect</span>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="section-divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Details</h3>
+        <div class="contact-detail">
+          <div>
+            <div style="font-size:0.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem;">Email</div>
+            <a href="mailto:dedelifewater@proton.me">dedelifewater@proton.me</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div>
+            <div style="font-size:0.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem;">Music</div>
+            <a href="https://www.bandlab.com" target="_blank">BandLab →</a>
+          </div>
+        </div>
+        <div class="contact-detail" style="border:none;">
+          <div>
+            <div style="font-size:0.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem;">Response Time</div>
+            <span style="color:var(--text-dim);">Usually within 48 hours</span>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding:1.4rem;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--ocean);">
+          <h4 style="font-family:'Cinzel',serif;font-size:.85rem;color:var(--ocean-light);margin-bottom:.75rem;">Open To</h4>
+          <ul style="color:var(--text-muted);font-size:.83rem;list-style:none;display:flex;flex-direction:column;gap:.45rem;">
+            <li>· Music collaborations &amp; features</li>
+            <li>· Beat producers looking to place tracks</li>
+            <li>· Creative projects &amp; partnerships</li>
+            <li>· Media &amp; press inquiries</li>
+            <li>· General conversation</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Cinzel',serif;font-size:.95rem;color:var(--ocean-light);margin-bottom:1.5rem;letter-spacing:.05em;">Send a Message</h3>
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="" disabled selected>Select a topic</option>
+              <option value="collab">Music Collaboration</option>
+              <option value="beats">Beat / Production</option>
+              <option value="press">Media / Press</option>
+              <option value="booking">Booking / Performance</option>
+              <option value="general">General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="align-self:flex-start;border:none;cursor:pointer;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">DeDe <span>Lifewater</span></div>
     <p class="footer-tagline">"Be formless, shapeless — like water."</p>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-      <a href="newsletter.html">Newsletter</a>
+      <a href="#about">About</a>
+      <a href="#writing">Writing</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#connect">Contact</a>
       <a href="mailto:dedelifewater@proton.me">Email</a>
     </div>
     <div class="footer-bottom">&copy; 2026 DeDe Lifewater. All rights reserved.</div>
