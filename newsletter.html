@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter — DeDe Lifewater</title>
+  <meta name="description" content="Join the Lifewater newsletter — music drops, writings, and the honest journey." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">DeDe <span>Lifewater</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="newsletter.html">Newsletter</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-hero">
+    <p class="section-label">The Current</p>
+    <h1 class="section-title" style="max-width: 600px; margin: 0 auto 1rem;">Join the <span>Lifewater</span> List</h1>
+    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
+      No algorithm. No shadowban. Just direct communication — music, words, and the real journey.
+    </p>
+  </div>
+
+  <section style="max-width: 700px;">
+
+    <!-- MAIN SIGNUP -->
+    <div class="reveal" style="text-align: center;">
+
+      <div style="padding: 3rem; background: var(--bg-card); border: 1px solid var(--border); border-top: 2px solid var(--jade); margin-bottom: 3rem;">
+        <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">
+          Stay In The <span>Current</span>
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">
+          Be the first to hear new music, read new writing, and follow the DeDe Lifewater journey in real time.
+        </p>
+
+        <!--
+          TO CONNECT A REAL EMAIL LIST:
+          Option 1 — Mailchimp (free up to 500 contacts):
+            1. Create account at mailchimp.com
+            2. Audience → Signup forms → Embedded forms
+            3. Replace this form with their embed code
+
+          Option 2 — ConvertKit (free up to 1000):
+            1. Create account at convertkit.com
+            2. Forms → Create form → Embed
+            3. Replace this form with their embed code
+
+          For now this form collects submissions visually but needs a backend to actually store them.
+          Use Formspree (free) as a quick bridge: formspree.io
+        -->
+        <form class="newsletter-form" style="max-width: 400px; margin: 0 auto;" onsubmit="return false;">
+          <input type="email" placeholder="your@email.com" />
+          <button type="submit">Join</button>
+        </form>
+        <p class="newsletter-note" style="margin-top: 1rem;">
+          No spam. Unsubscribe anytime. Your data stays private.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- WHAT YOU GET -->
+    <div class="reveal">
+      <p class="section-label">What's Inside</p>
+      <h2 class="section-title" style="font-size: 1.6rem;">What You'll <span>Receive</span></h2>
+      <div class="section-divider"></div>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+
+        <div class="pillar">
+          <h4>New Music Alerts</h4>
+          <p>Be the first to hear every new track, before it goes anywhere else.</p>
+        </div>
+
+        <div class="pillar">
+          <h4>Blog Posts & Writings</h4>
+          <p>New essays and reflections delivered directly — no feed, no algorithm, no noise.</p>
+        </div>
+
+        <div class="pillar">
+          <h4>Behind the Process</h4>
+          <p>The honest, unfiltered documentation of what it actually takes to build this.</p>
+        </div>
+
+        <div class="pillar">
+          <h4>Subscriber-Only Content</h4>
+          <p>Coming soon — exclusives, early access, and things that don't go on the main site.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COMING SOON NOTICE -->
+    <div class="reveal" style="margin-top: 3rem; padding: 1.5rem 2rem; background: var(--bg-secondary); border: 1px solid var(--border); border-left: 3px solid var(--ocean); text-align: left;">
+      <h4 style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--ocean-light); margin-bottom: 0.5rem;">
+        Full Newsletter System — Coming Soon
+      </h4>
+      <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+        The full newsletter system (automated sends, subscriber management, exclusive content) is
+        currently being built out. Sign up now and you'll be among the founding subscribers
+        when it launches.
+      </p>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-logo">DeDe <span>Lifewater</span></div>
+    <p class="footer-tagline">"Be formless, shapeless — like water."</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="music.html">Music</a>
+      <a href="contact.html">Contact</a>
+      <a href="newsletter.html">Newsletter</a>
+    </div>
+    <div class="footer-bottom">&copy; 2026 DeDe Lifewater. All rights reserved.</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
