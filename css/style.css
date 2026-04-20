@@ -406,6 +406,13 @@ section {
   padding: 6rem 3rem;
   max-width: 1100px;
   margin: 0 auto;
+  text-align: center;
+}
+
+section .about-grid,
+section .cards-grid,
+section .contact-grid {
+  text-align: left;
 }
 
 .section-label {
@@ -432,7 +439,7 @@ section {
   width: 50px;
   height: 2px;
   background: linear-gradient(to right, var(--jade), transparent);
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
 }
 
 /* ── ABOUT ── */
