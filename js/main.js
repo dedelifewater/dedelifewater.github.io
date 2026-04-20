@@ -224,9 +224,41 @@ if (canvas) {
   window.addEventListener('resize', resize);
 }
 
-// ── SIDEBAR ACTIVE LINK ──
+// ── NAV AUTO-HIDE / HOVER REVEAL ──
+const nav = document.querySelector('nav');
+const navTrigger = document.querySelector('.nav-trigger');
+let navTimeout;
+
+function showNav() {
+  clearTimeout(navTimeout);
+  nav?.classList.add('nav-visible');
+}
+
+function hideNav() {
+  navTimeout = setTimeout(() => {
+    nav?.classList.remove('nav-visible');
+  }, 600);
+}
+
+navTrigger?.addEventListener('mouseenter', showNav);
+nav?.addEventListener('mouseenter', showNav);
+nav?.addEventListener('mouseleave', hideNav);
+navTrigger?.addEventListener('mouseleave', hideNav);
+
+// Also show on scroll to top
+window.addEventListener('scroll', () => {
+  if (window.scrollY < 10) showNav();
+});
+
+// Mobile toggle
+document.querySelector('.nav-toggle')?.addEventListener('click', () => {
+  document.querySelector('.nav-links')?.classList.toggle('open');
+  showNav();
+});
+
+// Active link
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.sidebar-nav a').forEach(link => {
+document.querySelectorAll('.nav-links a').forEach(link => {
   if (link.getAttribute('href') === currentPage) link.classList.add('active');
 });
 
