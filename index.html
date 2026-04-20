@@ -40,7 +40,120 @@
 
   <!-- HERO -->
   <section class="hero">
-    <canvas id="hero-canvas"></canvas>
+    <div class="hero-tree">
+      <svg viewBox="0 -30 1200 620" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+
+        <ellipse class="canopy-glow" cx="600" cy="70" rx="280" ry="60"/>
+
+        <g class="tree-canopy">
+          <g class="tree-line">
+            <path d="M 600 130 Q 520 100 430 70"/>
+            <path d="M 600 130 Q 680 100 770 70"/>
+            <path d="M 600 160 Q 500 140 380 110"/>
+            <path d="M 600 160 Q 700 140 820 110"/>
+            <path d="M 600 100 Q 560 70 520 40"/>
+            <path d="M 600 100 Q 640 70 680 40"/>
+            <path d="M 430 70 Q 400 55 360 50"/>
+            <path d="M 430 70 Q 420 45 400 30"/>
+            <path d="M 770 70 Q 800 55 840 50"/>
+            <path d="M 770 70 Q 780 45 800 30"/>
+            <path d="M 380 110 Q 340 100 310 90"/>
+            <path d="M 820 110 Q 860 100 890 90"/>
+          </g>
+
+          <g>
+            <circle class="leaf" cx="360" cy="50" r="2"/>
+            <circle class="leaf" cx="400" cy="30" r="1.5"/>
+            <circle class="leaf" cx="520" cy="40" r="2"/>
+            <circle class="leaf" cx="680" cy="40" r="2"/>
+            <circle class="leaf" cx="800" cy="30" r="1.5"/>
+            <circle class="leaf" cx="840" cy="50" r="2"/>
+            <circle class="leaf" cx="310" cy="90" r="1.5"/>
+            <circle class="leaf" cx="890" cy="90" r="1.5"/>
+            <circle class="leaf" cx="450" cy="60" r="1.2"/>
+            <circle class="leaf" cx="750" cy="60" r="1.2"/>
+            <circle class="leaf" cx="600" cy="20" r="2.5"/>
+            <circle class="leaf" cx="560" cy="50" r="1"/>
+            <circle class="leaf" cx="640" cy="50" r="1"/>
+            <circle class="leaf" cx="480" cy="90" r="1.2"/>
+            <circle class="leaf" cx="720" cy="90" r="1.2"/>
+          </g>
+
+          <circle class="pulse-drop" cx="430" cy="70" r="2" style="animation-delay:0s"/>
+          <circle class="pulse-drop" cx="770" cy="70" r="2" style="animation-delay:0.7s"/>
+          <circle class="pulse-drop" cx="600" cy="20" r="2" style="animation-delay:1.4s"/>
+          <circle class="pulse-drop" cx="380" cy="110" r="2" style="animation-delay:2.1s"/>
+          <circle class="pulse-drop" cx="820" cy="110" r="2" style="animation-delay:2.8s"/>
+        </g>
+
+        <path class="tree-trunk" d="M 600 130 L 600 340"/>
+        <g class="tree-line" opacity="0.3">
+          <path d="M 596 180 L 596 320" stroke-width="0.5"/>
+          <path d="M 604 200 L 604 310" stroke-width="0.5"/>
+        </g>
+        <text class="trunk-label" x="612" y="245">THE·SOURCE</text>
+
+        <path id="root-1" class="tree-line-bright root-path-1"
+              d="M 600 340 Q 450 400 300 470 Q 200 510 150 590" stroke-width="1.4"/>
+        <path id="root-2" class="tree-line-bright root-path-2"
+              d="M 600 340 Q 540 400 490 450 Q 460 490 450 590" stroke-width="1.4"/>
+        <path id="root-3" class="tree-line-bright root-path-3"
+              d="M 600 340 Q 660 400 710 450 Q 740 490 750 590" stroke-width="1.4"/>
+        <path id="root-4" class="tree-line-bright root-path-4"
+              d="M 600 340 Q 750 400 900 470 Q 1000 510 1050 590" stroke-width="1.6"/>
+
+        <g class="tree-line" opacity="0.4">
+          <path d="M 400 440 Q 350 460 320 490"/>
+          <path d="M 500 460 Q 510 490 490 510"/>
+          <path d="M 700 460 Q 690 490 710 510"/>
+          <path d="M 800 440 Q 850 460 880 490"/>
+        </g>
+
+        <circle cx="600" cy="340" r="3" fill="#1a4a60" opacity="0.9"/>
+        <circle cx="600" cy="340" r="9" fill="none" stroke="#1a4a60" stroke-width="0.5" opacity="0.4"/>
+
+        <!-- Droplet 1 — jade -->
+        <circle class="drop-1" r="2.5">
+          <animateMotion dur="5s" repeatCount="indefinite" begin="0s"><mpath href="#root-1"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5s" repeatCount="indefinite" begin="0s"/>
+        </circle>
+        <circle class="drop-1" r="2">
+          <animateMotion dur="5s" repeatCount="indefinite" begin="2.5s"><mpath href="#root-1"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5s" repeatCount="indefinite" begin="2.5s"/>
+        </circle>
+
+        <!-- Droplet 2 — ocean -->
+        <circle class="drop-2" r="2.5">
+          <animateMotion dur="6s" repeatCount="indefinite" begin="1s"><mpath href="#root-2"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+        <circle class="drop-2" r="2">
+          <animateMotion dur="6s" repeatCount="indefinite" begin="4s"><mpath href="#root-2"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="4s"/>
+        </circle>
+
+        <!-- Droplet 3 — gold -->
+        <circle class="drop-3" r="2.5">
+          <animateMotion dur="5.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#root-3"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="0.5s"/>
+        </circle>
+        <circle class="drop-3" r="2">
+          <animateMotion dur="5.5s" repeatCount="indefinite" begin="3s"><mpath href="#root-3"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="3s"/>
+        </circle>
+
+        <!-- Droplet 4 — ocean, prominent -->
+        <circle class="drop-4" r="3">
+          <animateMotion dur="4.5s" repeatCount="indefinite" begin="0.2s"><mpath href="#root-4"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4.5s" repeatCount="indefinite" begin="0.2s"/>
+        </circle>
+        <circle class="drop-4" r="2">
+          <animateMotion dur="4.5s" repeatCount="indefinite" begin="2.2s"><mpath href="#root-4"/></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4.5s" repeatCount="indefinite" begin="2.2s"/>
+        </circle>
+
+      </svg>
+    </div>
     <div class="hero-content">
       <p class="hero-eyebrow">Artist · Writer · Lifewater</p>
       <h1 class="hero-title">

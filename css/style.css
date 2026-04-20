@@ -179,6 +179,65 @@ nav.nav-visible {
   color: var(--text-muted);
 }
 
+/* ── HERO TREE SVG ── */
+.hero-tree {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+
+.hero-tree svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tree-line       { stroke: #112a3a; fill: none; stroke-linecap: round; stroke-width: 1; }
+.tree-line-bright{ stroke: #1a4a60; fill: none; stroke-linecap: round; stroke-width: 1.2; }
+.tree-trunk      { stroke: #0e5570; fill: none; stroke-linecap: round; stroke-width: 1.8; }
+
+.root-path-1 { stroke: #00c896; opacity: 0.4; }
+.root-path-2 { stroke: #4db8d4; opacity: 0.35; }
+.root-path-3 { stroke: #c8a040; opacity: 0.35; }
+.root-path-4 { stroke: #4db8d4; opacity: 0.5; }
+
+.leaf { fill: #1a4a60; opacity: 0.7; }
+.canopy-glow { fill: rgba(26,127,168,0.12); filter: blur(8px); }
+
+.tree-canopy {
+  transform-origin: 600px 320px;
+  animation: treeSway 9s ease-in-out infinite;
+}
+
+@keyframes treeSway {
+  0%, 100% { transform: rotate(-0.25deg); }
+  50%       { transform: rotate(0.25deg); }
+}
+
+.pulse-drop {
+  fill: #4db8d4;
+  animation: pulseDrop 3.5s ease-in-out infinite;
+}
+
+@keyframes pulseDrop {
+  0%, 100% { opacity: 0; r: 1; }
+  50%       { opacity: 0.8; r: 2.5; }
+}
+
+.drop-1 { fill: #00c896; }
+.drop-2 { fill: #4db8d4; }
+.drop-3 { fill: #c8a040; }
+.drop-4 { fill: #4db8d4; }
+
+.trunk-label {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  fill: #1a3a50;
+  text-transform: uppercase;
+}
+
 /* ── HERO ── */
 .hero {
   position: relative;
