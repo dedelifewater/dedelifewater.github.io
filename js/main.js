@@ -1,3 +1,153 @@
+// ── STARFIELD & CONSTELLATIONS ──
+(function () {
+  const canvas = document.getElementById('star-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let stars = [], time = 0;
+
+  const CONSTELLATIONS = [
+    {
+      name: 'URSA MAJOR',
+      pts: [[0.08,0.12],[0.14,0.09],[0.20,0.08],[0.26,0.11],[0.30,0.18],[0.37,0.23],[0.42,0.20]],
+      lines: [[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]]
+    },
+    {
+      name: 'ORION',
+      pts: [[0.60,0.08],[0.68,0.06],[0.60,0.16],[0.64,0.16],[0.68,0.16],[0.58,0.26],[0.70,0.24],[0.64,0.10]],
+      lines: [[0,2],[1,4],[2,3],[3,4],[2,5],[4,6],[0,7],[1,7],[7,2]]
+    },
+    {
+      name: 'CASSIOPEIA',
+      pts: [[0.76,0.06],[0.80,0.03],[0.85,0.07],[0.89,0.03],[0.93,0.07]],
+      lines: [[0,1],[1,2],[2,3],[3,4]]
+    },
+    {
+      name: 'AQUARIUS',
+      pts: [[0.50,0.52],[0.54,0.47],[0.58,0.50],[0.62,0.46],[0.57,0.57],[0.52,0.63],[0.62,0.61],[0.55,0.54]],
+      lines: [[0,1],[1,2],[2,3],[0,7],[7,4],[4,5],[4,6]]
+    },
+    {
+      name: 'LEO',
+      pts: [[0.18,0.52],[0.22,0.47],[0.27,0.45],[0.29,0.50],[0.27,0.56],[0.21,0.58],[0.34,0.48]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[3,6]]
+    },
+    {
+      name: 'SCORPIUS',
+      pts: [[0.80,0.52],[0.78,0.47],[0.76,0.44],[0.74,0.49],[0.72,0.55],[0.70,0.61],[0.68,0.67],[0.70,0.72],[0.74,0.70]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]]
+    },
+    {
+      name: 'SOUTHERN CROSS',
+      pts: [[0.35,0.75],[0.35,0.85],[0.30,0.80],[0.40,0.80]],
+      lines: [[0,1],[2,3]]
+    }
+  ];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    buildStars();
+  }
+
+  function buildStars() {
+    stars = [];
+    const count = Math.min(600, Math.floor(canvas.width * canvas.height / 3000));
+    for (let i = 0; i < count; i++) {
+      const roll = Math.random();
+      stars.push({
+        x: Math.random(), y: Math.random(),
+        size: roll < 0.04 ? 1.6 : roll < 0.18 ? 1.0 : 0.5,
+        base: Math.random() * 0.45 + 0.1,
+        speed: Math.random() * 0.008 + 0.002,
+        offset: Math.random() * Math.PI * 2,
+        warm: Math.random() < 0.08
+      });
+    }
+  }
+
+  function drawStars() {
+    const w = canvas.width, h = canvas.height;
+    stars.forEach(s => {
+      const alpha = s.base + Math.sin(time * s.speed * 60 + s.offset) * 0.25;
+      ctx.beginPath();
+      ctx.arc(s.x * w, s.y * h, s.size, 0, Math.PI * 2);
+      ctx.fillStyle = s.warm
+        ? `rgba(255,215,160,${Math.max(0.05, alpha)})`
+        : `rgba(220,232,255,${Math.max(0.05, alpha)})`;
+      ctx.fill();
+    });
+  }
+
+  function drawConstellations() {
+    const w = canvas.width, h = canvas.height;
+    const pulse = Math.sin(time * 0.25) * 0.1 + 0.9;
+
+    CONSTELLATIONS.forEach(c => {
+      const pts = c.pts.map(([x, y]) => [x * w, y * h]);
+
+      // Lines
+      ctx.save();
+      ctx.strokeStyle = `rgba(77,184,212,${0.18 * pulse})`;
+      ctx.lineWidth = 0.6;
+      ctx.setLineDash([4, 8]);
+      c.lines.forEach(([a, b]) => {
+        ctx.beginPath();
+        ctx.moveTo(pts[a][0], pts[a][1]);
+        ctx.lineTo(pts[b][0], pts[b][1]);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // Stars
+      pts.forEach(([x, y], i) => {
+        const twinkle = Math.sin(time * 1.2 + i * 1.7) * 0.2 + 0.8;
+        // Glow
+        const grd = ctx.createRadialGradient(x, y, 0, x, y, 7);
+        grd.addColorStop(0, `rgba(160,220,255,${0.25 * twinkle * pulse})`);
+        grd.addColorStop(1, 'transparent');
+        ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2);
+        ctx.fillStyle = grd; ctx.fill();
+        // Core
+        ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(210,240,255,${0.85 * twinkle * pulse})`;
+        ctx.fill();
+      });
+
+      // Label near centroid
+      const cx = pts.reduce((s, p) => s + p[0], 0) / pts.length;
+      const cy = Math.min(...pts.map(p => p[1])) - 14;
+      ctx.fillStyle = `rgba(77,184,212,${0.22 * pulse})`;
+      ctx.font = '7px monospace';
+      ctx.textAlign = 'center';
+      ctx.letterSpacing = '0.15em';
+      ctx.fillText(c.name, cx, cy);
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Deep space background
+    ctx.fillStyle = '#04060e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Subtle nebula glow
+    const neb = ctx.createRadialGradient(canvas.width*0.5, canvas.height*0.3, 0, canvas.width*0.5, canvas.height*0.3, canvas.width*0.6);
+    neb.addColorStop(0, 'rgba(10,20,40,0.6)');
+    neb.addColorStop(0.4, 'rgba(6,14,28,0.3)');
+    neb.addColorStop(1, 'transparent');
+    ctx.fillStyle = neb; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    time += 0.016;
+    drawStars();
+    drawConstellations();
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  animate();
+  window.addEventListener('resize', resize);
+})();
+
 // ── MOON PHASE ──
 function getMoonPhase() {
   const knownNewMoon = new Date('2000-01-06T18:14:00Z');
