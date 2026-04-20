@@ -264,27 +264,22 @@ nav.nav-visible {
 }
 
 .hero-logo {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 1.5rem;
+  width: 72px;
+  height: auto;
+  margin: 0 auto 1.2rem;
   display: block;
-  border: 1px solid var(--border-glow);
-  box-shadow: 0 0 24px var(--jade-glow), 0 0 48px rgba(0,200,150,0.08);
+  filter: drop-shadow(0 0 10px rgba(0,200,150,0.4));
   opacity: 0;
   animation: fadeUp 1s ease forwards 0.2s;
 }
 
 .footer-logo-img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 0 auto 0.75rem;
+  width: 44px;
+  height: auto;
+  margin: 0 auto 0.6rem;
   display: block;
-  border: 1px solid var(--border);
-  opacity: 0.85;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 6px rgba(0,200,150,0.2));
 }
 
 .hero-eyebrow {
