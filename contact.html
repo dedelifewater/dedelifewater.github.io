@@ -9,22 +9,35 @@
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="nav-logo">DeDe <span>Lifewater</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="music.html">Music</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
+  <nav class="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">DeDe <span>Lifewater</span></span>
+    </a>
+    <ul class="sidebar-nav">
+      <li><a href="index.html"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></a></li>
+      <li><a href="blog.html"><span class="nav-icon">✦</span><span class="nav-label">Blog</span></a></li>
+      <li><a href="contact.html"><span class="nav-icon">◉</span><span class="nav-label">Contact</span></a></li>
+      <li><a href="newsletter.html"><span class="nav-icon">◈</span><span class="nav-label">Newsletter</span></a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="sidebar-bottom">
+      <a href="mailto:dedelifewater@proton.me">
+        <span class="nav-icon">✉</span>
+        <span class="nav-label">Email</span>
+      </a>
+    </div>
   </nav>
 
+  <div class="moon-tracker" id="moon-tracker">
+    <span class="moon-emoji">🌕</span>
+    <div class="moon-info">
+      <span class="moon-phase-name">Loading…</span>
+      <span class="moon-illumination"></span>
+    </div>
+  </div>
+
   <div class="page-hero">
-    <p class="section-label">Connect</p>
+    <span class="section-label">Connect</span>
     <h1 class="section-title" style="max-width: 600px; margin: 0 auto 1rem;">Get In <span>Touch</span></h1>
     <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
       Collabs, bookings, questions, or just reaching out — the door is open.
@@ -34,34 +47,33 @@
   <section>
     <div class="contact-grid reveal">
 
-      <!-- LEFT: INFO -->
       <div class="contact-info">
         <h3>Contact Details</h3>
 
         <div class="contact-detail">
           <div>
-            <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;">Email</div>
+            <div style="font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;">Email</div>
             <a href="mailto:dedelifewater@proton.me">dedelifewater@proton.me</a>
           </div>
         </div>
 
         <div class="contact-detail">
           <div>
-            <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;">Music</div>
+            <div style="font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;">Music</div>
             <a href="https://www.bandlab.com" target="_blank">BandLab Profile →</a>
           </div>
         </div>
 
         <div class="contact-detail" style="border: none;">
           <div>
-            <div style="font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;">Response Time</div>
+            <div style="font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;">Response Time</div>
             <span style="color: var(--text-dim);">Usually within 48 hours</span>
           </div>
         </div>
 
-        <div style="margin-top: 2.5rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--ocean);">
-          <h4 style="font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--ocean-light); margin-bottom: 0.75rem;">Open To</h4>
-          <ul style="color: var(--text-muted); font-size: 0.85rem; list-style: none; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="margin-top: 2rem; padding: 1.4rem; background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--ocean);">
+          <h4 style="font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--ocean-light); margin-bottom: 0.75rem;">Open To</h4>
+          <ul style="color: var(--text-muted); font-size: 0.83rem; list-style: none; display: flex; flex-direction: column; gap: 0.45rem;">
             <li>· Music collaborations &amp; features</li>
             <li>· Beat producers looking to place tracks</li>
             <li>· Creative projects &amp; partnerships</li>
@@ -71,34 +83,18 @@
         </div>
       </div>
 
-      <!-- RIGHT: FORM -->
       <div class="reveal">
-        <h3 style="font-family: 'Cinzel', serif; font-size: 1rem; color: var(--ocean-light); margin-bottom: 1.5rem; letter-spacing: 0.05em;">Send a Message</h3>
+        <h3 style="font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--ocean-light); margin-bottom: 1.5rem; letter-spacing: 0.05em;">Send a Message</h3>
 
-        <!--
-          This form uses Formspree (free) to send emails to your ProtonMail.
-          To activate:
-          1. Go to formspree.io and create a free account
-          2. Create a new form → get your form ID
-          3. Replace "YOUR_FORM_ID" in the action URL below with your actual ID
-          Until then, the form sends to ProtonMail via mailto as fallback.
-        -->
-        <form
-          id="contact-form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
-          method="POST"
-          class="contact-form"
-        >
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
           <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required />
           </div>
-
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="your@email.com" required />
           </div>
-
           <div class="form-group">
             <label for="subject">Subject</label>
             <select id="subject" name="subject" required>
@@ -110,15 +106,11 @@
               <option value="general">General Inquiry</option>
             </select>
           </div>
-
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
           </div>
-
-          <button type="submit" class="btn-primary" style="align-self: flex-start; border: none; cursor: pointer;">
-            Send Message
-          </button>
+          <button type="submit" class="btn-primary" style="align-self: flex-start; border: none; cursor: pointer;">Send Message</button>
         </form>
       </div>
 
@@ -131,7 +123,6 @@
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
-      <a href="music.html">Music</a>
       <a href="contact.html">Contact</a>
       <a href="newsletter.html">Newsletter</a>
     </div>

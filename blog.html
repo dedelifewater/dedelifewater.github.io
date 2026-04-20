@@ -9,22 +9,35 @@
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="nav-logo">DeDe <span>Lifewater</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="music.html">Music</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
+  <nav class="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">DeDe <span>Lifewater</span></span>
+    </a>
+    <ul class="sidebar-nav">
+      <li><a href="index.html"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></a></li>
+      <li><a href="blog.html"><span class="nav-icon">✦</span><span class="nav-label">Blog</span></a></li>
+      <li><a href="contact.html"><span class="nav-icon">◉</span><span class="nav-label">Contact</span></a></li>
+      <li><a href="newsletter.html"><span class="nav-icon">◈</span><span class="nav-label">Newsletter</span></a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="sidebar-bottom">
+      <a href="mailto:dedelifewater@proton.me">
+        <span class="nav-icon">✉</span>
+        <span class="nav-label">Email</span>
+      </a>
+    </div>
   </nav>
 
+  <div class="moon-tracker" id="moon-tracker">
+    <span class="moon-emoji">🌕</span>
+    <div class="moon-info">
+      <span class="moon-phase-name">Loading…</span>
+      <span class="moon-illumination"></span>
+    </div>
+  </div>
+
   <div class="page-hero">
-    <p class="section-label">The Pages</p>
+    <span class="section-label">The Pages</span>
     <h1 class="section-title" style="max-width:600px; margin: 0 auto 1rem;">Writings &amp; <span>Reflections</span></h1>
     <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">
       Rap journey, philosophy, personal growth, and the honest documentation of building something from nothing.
@@ -33,70 +46,39 @@
 
   <section>
     <div class="blog-grid">
-
-      <!-- MAIN POSTS -->
       <div class="blog-main">
 
         <a href="#" class="card reveal">
           <p class="card-tag">Rap Journey · Apr 2026</p>
           <h3>Learning to Flow: Month One on the Mic</h3>
-          <p>
-            What happens when you decide to learn rap from scratch with no background in music
-            performance? Honest reflections on the first steps, the awkward bars, what tools actually
-            helped (shoutout Claude and Gemini), and what's clicking now.
-          </p>
-          <div class="card-meta">
-            <span>5 min read</span>
-            <span class="card-read-more">Read →</span>
-          </div>
+          <p>What happens when you decide to learn rap from scratch with no background in music performance? Honest reflections on the first steps, the awkward bars, what tools actually helped, and what's clicking now.</p>
+          <div class="card-meta"><span>5 min read</span><span class="card-read-more">Read →</span></div>
         </a>
 
         <a href="#" class="card reveal">
           <p class="card-tag">Philosophy · Apr 2026</p>
           <h3>Become Like Water: Why Bruce Lee Changed How I See Music</h3>
-          <p>
-            "Be formless, shapeless — like water." These seven words shaped the entire DeDe Lifewater
-            brand. But what does it actually mean to apply that philosophy to art, identity, and the
-            process of becoming an artist?
-          </p>
-          <div class="card-meta">
-            <span>7 min read</span>
-            <span class="card-read-more">Read →</span>
-          </div>
+          <p>"Be formless, shapeless — like water." These seven words shaped the entire DeDe Lifewater brand. But what does it actually mean to apply that philosophy to art, identity, and the process of becoming an artist?</p>
+          <div class="card-meta"><span>7 min read</span><span class="card-read-more">Read →</span></div>
         </a>
 
         <a href="#" class="card reveal">
           <p class="card-tag">Personal Brand · Apr 2026</p>
           <h3>Building Without a Blueprint: The DeDe Lifewater Origin</h3>
-          <p>
-            No manager, no label, no roadmap. Just a vision and whatever tools are available.
-            Here's what actually building an independent artist brand looks like from day zero —
-            the wins, the confusion, and the real direction forming underneath it all.
-          </p>
-          <div class="card-meta">
-            <span>6 min read</span>
-            <span class="card-read-more">Read →</span>
-          </div>
+          <p>No manager, no label, no roadmap. Just a vision and whatever tools are available. Here's what actually building an independent artist brand looks like from day zero.</p>
+          <div class="card-meta"><span>6 min read</span><span class="card-read-more">Read →</span></div>
         </a>
 
         <a href="#" class="card reveal">
           <p class="card-tag">Music Process · Coming Soon</p>
-          <h3>From BandLab to My Own Platform: Taking Control of the Music</h3>
-          <p>
-            Why I'm building my own corner of the internet instead of relying on platforms that
-            can shadowban, demonetize, or disappear. The philosophy of owning your work.
-          </p>
-          <div class="card-meta">
-            <span>Draft</span>
-            <span class="card-read-more" style="color: var(--text-muted);">Coming Soon</span>
-          </div>
+          <h3>From BandLab to Owning My Platform</h3>
+          <p>Why I'm building my own corner of the internet instead of relying on platforms that can shadowban, demonetize, or disappear. The philosophy of owning your work.</p>
+          <div class="card-meta"><span>Draft</span><span class="card-read-more" style="color: var(--text-muted);">Coming Soon</span></div>
         </a>
 
       </div>
 
-      <!-- SIDEBAR -->
       <aside class="blog-sidebar reveal">
-
         <h3>Topics</h3>
         <div class="sidebar-tags" style="margin-bottom: 2.5rem;">
           <a href="#" class="tag">Rap Journey</a>
@@ -126,7 +108,6 @@
           <a href="https://www.bandlab.com" target="_blank">BandLab →</a>
         </div>
       </aside>
-
     </div>
   </section>
 
@@ -136,7 +117,6 @@
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
-      <a href="music.html">Music</a>
       <a href="contact.html">Contact</a>
       <a href="newsletter.html">Newsletter</a>
     </div>

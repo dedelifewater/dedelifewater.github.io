@@ -9,20 +9,34 @@
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <a href="index.html" class="nav-logo">DeDe <span>Lifewater</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="music.html">Music</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="newsletter.html">Newsletter</a></li>
+  <!-- LEFT SIDEBAR NAV -->
+  <nav class="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">DeDe <span>Lifewater</span></span>
+    </a>
+    <ul class="sidebar-nav">
+      <li><a href="index.html"><span class="nav-icon">⌂</span><span class="nav-label">Home</span></a></li>
+      <li><a href="blog.html"><span class="nav-icon">✦</span><span class="nav-label">Blog</span></a></li>
+      <li><a href="contact.html"><span class="nav-icon">◉</span><span class="nav-label">Contact</span></a></li>
+      <li><a href="newsletter.html"><span class="nav-icon">◈</span><span class="nav-label">Newsletter</span></a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="sidebar-bottom">
+      <a href="mailto:dedelifewater@proton.me">
+        <span class="nav-icon">✉</span>
+        <span class="nav-label">Email</span>
+      </a>
+    </div>
   </nav>
+
+  <!-- MOON TRACKER -->
+  <div class="moon-tracker" id="moon-tracker">
+    <span class="moon-emoji">🌕</span>
+    <div class="moon-info">
+      <span class="moon-phase-name">Loading…</span>
+      <span class="moon-illumination"></span>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -38,8 +52,8 @@
         <br />― Bruce Lee
       </p>
       <div class="hero-cta">
-        <a href="music.html" class="btn-primary">Hear the Music</a>
-        <a href="blog.html" class="btn-secondary">Read the Words</a>
+        <a href="blog.html" class="btn-primary">Read the Words</a>
+        <a href="newsletter.html" class="btn-secondary">Join the Current</a>
       </div>
     </div>
     <div class="scroll-indicator">Scroll</div>
@@ -49,17 +63,17 @@
   <section>
     <div class="about-grid reveal">
       <div class="about-text">
-        <p class="section-label">The Current</p>
+        <span class="section-label">The Current</span>
         <h2 class="section-title">Who Is <span>DeDe Lifewater</span></h2>
         <div class="section-divider"></div>
         <p>
           Born from the philosophy of water — adaptive, persistent, and life-giving.
-          DeDe Lifewater is a rapper and writer carving out an authentic space in music,
+          DeDe Lifewater is a rapper and writer carving out an authentic space,
           guided by the belief that <strong>growth is the only constant</strong>.
         </p>
         <p>
           Drawing from conscious lyricism, personal experience, and the art of becoming,
-          this is a journey told in bars, prose, and sound. No shortcuts. No performance.
+          this is a journey told in bars and prose. No shortcuts. No performance.
           Just <strong>the honest current</strong>.
         </p>
         <a href="blog.html" class="btn-secondary" style="display:inline-block; margin-top: 1.5rem;">Read the Journey</a>
@@ -88,7 +102,7 @@
 
   <!-- LATEST BLOG -->
   <section class="reveal">
-    <p class="section-label">From the Pages</p>
+    <span class="section-label">From the Pages</span>
     <h2 class="section-title">Latest <span>Writings</span></h2>
     <div class="section-divider"></div>
 
@@ -125,33 +139,11 @@
     </div>
   </section>
 
-  <!-- MUSIC PREVIEW -->
-  <section class="reveal">
-    <p class="section-label">The Sound</p>
-    <h2 class="section-title">Latest <span>Music</span></h2>
-    <div class="section-divider"></div>
-
-    <div class="music-embed">
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
-        Stream on BandLab — early works from the journey.
-      </p>
-      <!-- Replace the src below with your actual BandLab embed URL -->
-      <p style="color: var(--text-dim); font-size: 0.85rem; padding: 2rem; border: 1px dashed var(--border); text-align: center;">
-        [ Your BandLab embed will go here — paste your profile link and we'll add it ]
-      </p>
-
-      <div class="music-platforms">
-        <a href="https://www.bandlab.com" class="platform-link" target="_blank">BandLab</a>
-        <a href="music.html" class="platform-link">All Music →</a>
-      </div>
-    </div>
-  </section>
-
   <!-- NEWSLETTER CTA -->
   <div class="newsletter-section reveal">
-    <p class="section-label" style="text-align:center;">Stay in the Current</p>
+    <span class="section-label">Stay in the Current</span>
     <h2 class="section-title" style="text-align:center;">Join the <span>Lifewater</span> List</h2>
-    <p>New music drops, writing, and the honest documentation of building something real. No spam — just the current.</p>
+    <p>New writing, music drops, and the honest documentation of building something real. No spam — just the current.</p>
     <form class="newsletter-form" onsubmit="return false;">
       <input type="email" placeholder="your@email.com" />
       <button type="submit">Join</button>
@@ -166,14 +158,11 @@
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="blog.html">Blog</a>
-      <a href="music.html">Music</a>
       <a href="contact.html">Contact</a>
       <a href="newsletter.html">Newsletter</a>
       <a href="mailto:dedelifewater@proton.me">Email</a>
     </div>
-    <div class="footer-bottom">
-      &copy; 2026 DeDe Lifewater. All rights reserved.
-    </div>
+    <div class="footer-bottom">&copy; 2026 DeDe Lifewater. All rights reserved.</div>
   </footer>
 
   <script src="js/main.js"></script>
