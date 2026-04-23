@@ -374,6 +374,26 @@ if (canvas) {
   window.addEventListener('resize', resize);
 }
 
+// ── PAGE TREE: scale SVG to full document height ──
+(function () {
+  const svg = document.getElementById('page-tree-svg');
+  const div = document.getElementById('page-tree');
+  if (!svg || !div) return;
+
+  function resize() {
+    const pageH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const pageW = window.innerWidth || 1;
+    div.style.height = pageH + 'px';
+    // Map pixel height to SVG coordinate units (SVG is 1200 units wide)
+    const svgH = Math.ceil((pageH / pageW) * 1200) + 100;
+    svg.setAttribute('viewBox', '0 -30 1200 ' + svgH);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  window.addEventListener('load', resize);
+})();
+
 // ── NAV AUTO-HIDE / HOVER REVEAL ──
 const nav = document.querySelector('nav');
 const navTrigger = document.querySelector('.nav-trigger');

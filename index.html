@@ -11,6 +11,215 @@
 
   <canvas id="star-canvas"></canvas>
 
+  <!-- FULL-PAGE TREE OF LIFE -->
+  <div id="page-tree">
+    <svg id="page-tree-svg" viewBox="0 -30 1200 4000" preserveAspectRatio="xMidYMin meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="logo-clip"><circle cx="600" cy="25" r="46"/></clipPath>
+        <filter id="logo-glow" x="-25%" y="-25%" width="150%" height="150%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
+          <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0  0 0.784 0.588 0 0  0 0 0 0 0  0 0 0 0.75 0" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Canopy -->
+      <ellipse class="canopy-glow" cx="600" cy="70" rx="280" ry="60"/>
+      <g class="tree-canopy">
+        <g class="tree-line">
+          <path d="M 600 130 Q 520 100 430 70"/>
+          <path d="M 600 130 Q 680 100 770 70"/>
+          <path d="M 600 160 Q 500 140 380 110"/>
+          <path d="M 600 160 Q 700 140 820 110"/>
+          <path d="M 600 100 Q 560 70 520 40"/>
+          <path d="M 600 100 Q 640 70 680 40"/>
+          <path d="M 430 70 Q 400 55 360 50"/>
+          <path d="M 430 70 Q 420 45 400 30"/>
+          <path d="M 770 70 Q 800 55 840 50"/>
+          <path d="M 770 70 Q 780 45 800 30"/>
+          <path d="M 380 110 Q 340 100 310 90"/>
+          <path d="M 820 110 Q 860 100 890 90"/>
+        </g>
+        <g>
+          <circle class="leaf" cx="360" cy="50" r="2"/>
+          <circle class="leaf" cx="400" cy="30" r="1.5"/>
+          <circle class="leaf" cx="520" cy="40" r="2"/>
+          <circle class="leaf" cx="680" cy="40" r="2"/>
+          <circle class="leaf" cx="800" cy="30" r="1.5"/>
+          <circle class="leaf" cx="840" cy="50" r="2"/>
+          <circle class="leaf" cx="310" cy="90" r="1.5"/>
+          <circle class="leaf" cx="890" cy="90" r="1.5"/>
+          <circle class="leaf" cx="450" cy="60" r="1.2"/>
+          <circle class="leaf" cx="750" cy="60" r="1.2"/>
+          <circle class="leaf" cx="600" cy="20" r="2.5"/>
+          <circle class="leaf" cx="560" cy="50" r="1"/>
+          <circle class="leaf" cx="640" cy="50" r="1"/>
+          <circle class="leaf" cx="480" cy="90" r="1.2"/>
+          <circle class="leaf" cx="720" cy="90" r="1.2"/>
+        </g>
+        <circle class="pulse-drop" cx="430" cy="70" r="2" style="animation-delay:0s"/>
+        <circle class="pulse-drop" cx="770" cy="70" r="2" style="animation-delay:0.7s"/>
+        <circle class="pulse-drop" cx="600" cy="20" r="2" style="animation-delay:1.4s"/>
+        <circle class="pulse-drop" cx="380" cy="110" r="2" style="animation-delay:2.1s"/>
+        <circle class="pulse-drop" cx="820" cy="110" r="2" style="animation-delay:2.8s"/>
+      </g>
+
+      <!-- Trunk -->
+      <path class="tree-trunk" d="M 600 130 L 600 340"/>
+      <g class="tree-line" opacity="0.3">
+        <path d="M 596 180 L 596 320" stroke-width="0.5"/>
+        <path d="M 604 200 L 604 310" stroke-width="0.5"/>
+      </g>
+      <text class="trunk-label" x="612" y="245">THE·SOURCE</text>
+
+      <!-- Extended roots flowing through all page sections -->
+      <!-- Root 1: jade — sweeps far left → About section -->
+      <path id="root-1" class="tree-line-bright root-path-1"
+        d="M 600 340 Q 420 450 255 565 Q 135 645 75 790 Q 15 950 52 1130 Q 88 1310 42 1510 Q 8 1710 58 1920 Q 108 2110 52 2320"
+        stroke-width="1.4"/>
+
+      <!-- Root 2: ocean — center-left → Videos section -->
+      <path id="root-2" class="tree-line-bright root-path-2"
+        d="M 600 340 Q 512 462 458 592 Q 412 714 392 886 Q 366 1088 393 1308 Q 420 1548 372 1808 Q 325 2090 378 2368 Q 428 2628 372 2888"
+        stroke-width="1.4"/>
+
+      <!-- Root 3: gold — center-right → Videos section -->
+      <path id="root-3" class="tree-line-bright root-path-3"
+        d="M 600 340 Q 688 462 742 592 Q 788 714 808 886 Q 834 1088 807 1308 Q 780 1548 828 1808 Q 875 2090 822 2368 Q 772 2628 828 2888"
+        stroke-width="1.4"/>
+
+      <!-- Root 4: ocean deep — far right → Contact form -->
+      <path id="root-4" class="tree-line-bright root-path-4"
+        d="M 600 340 Q 802 458 964 570 Q 1084 654 1128 798 Q 1178 974 1138 1180 Q 1098 1400 1160 1642 Q 1222 1908 1155 2192 Q 1088 2488 1155 2808 Q 1222 3132 1138 3418 Q 1072 3648 1138 3928"
+        stroke-width="1.6"/>
+
+      <!-- Root 5: center spine → Newsletter / Contact center -->
+      <path id="root-5" class="tree-line-bright root-path-5"
+        d="M 600 340 Q 590 710 600 1110 Q 612 1558 584 2048 Q 556 2558 596 3092 Q 630 3578 588 4020"
+        stroke-width="1.1"/>
+
+      <!-- Organic sub-branches for root richness -->
+      <g class="tree-line" opacity="0.17">
+        <path d="M 255 565 Q 318 577 375 560" stroke-width="0.8"/>
+        <path d="M 75 790 Q 142 806 204 788" stroke-width="0.7"/>
+        <path d="M 52 1130 Q 122 1146 190 1128" stroke-width="0.6"/>
+        <path d="M 42 1510 Q 112 1525 178 1508" stroke-width="0.5"/>
+        <path d="M 58 1920 Q 128 1936 195 1918" stroke-width="0.5"/>
+        <path d="M 392 886 Q 336 902 272 886" stroke-width="0.7"/>
+        <path d="M 393 1308 Q 336 1325 271 1309" stroke-width="0.6"/>
+        <path d="M 372 1808 Q 314 1825 248 1808" stroke-width="0.5"/>
+        <path d="M 378 2368 Q 320 2384 255 2368" stroke-width="0.5"/>
+        <path d="M 808 886 Q 864 902 928 886" stroke-width="0.7"/>
+        <path d="M 807 1308 Q 864 1325 929 1309" stroke-width="0.6"/>
+        <path d="M 828 1808 Q 886 1825 952 1808" stroke-width="0.5"/>
+        <path d="M 822 2368 Q 880 2384 945 2368" stroke-width="0.5"/>
+        <path d="M 1128 798 Q 1072 818 1010 802" stroke-width="0.7"/>
+        <path d="M 1160 1642 Q 1100 1660 1038 1644" stroke-width="0.6"/>
+        <path d="M 1155 2192 Q 1094 2210 1032 2194" stroke-width="0.5"/>
+        <path d="M 1155 2808 Q 1094 2826 1032 2810" stroke-width="0.5"/>
+        <path d="M 1138 3418 Q 1078 3436 1016 3420" stroke-width="0.4"/>
+        <path d="M 600 1110 Q 652 1128 718 1112" stroke-width="0.6"/>
+        <path d="M 600 1110 Q 548 1128 482 1112" stroke-width="0.6"/>
+        <path d="M 584 2048 Q 636 2066 700 2050" stroke-width="0.5"/>
+        <path d="M 584 2048 Q 532 2066 468 2050" stroke-width="0.5"/>
+        <path d="M 596 3092 Q 646 3110 708 3094" stroke-width="0.4"/>
+        <path d="M 596 3092 Q 546 3110 484 3094" stroke-width="0.4"/>
+      </g>
+
+      <!-- Section anchor node: About -->
+      <circle class="section-node" cx="52" cy="1130" r="4" style="fill:#00c896"/>
+      <circle class="section-node-outer" cx="52" cy="1130" r="13" style="fill:none;stroke:#00c896;stroke-width:0.6"/>
+
+      <!-- Section anchor nodes: Videos (left + right) -->
+      <circle class="section-node" cx="372" cy="1808" r="4" style="fill:#4db8d4;animation-delay:0.6s"/>
+      <circle class="section-node-outer" cx="372" cy="1808" r="13" style="fill:none;stroke:#4db8d4;stroke-width:0.6;animation-delay:0.6s"/>
+      <circle class="section-node" cx="828" cy="1808" r="4" style="fill:#c8a040;animation-delay:1.2s"/>
+      <circle class="section-node-outer" cx="828" cy="1808" r="13" style="fill:none;stroke:#c8a040;stroke-width:0.6;animation-delay:1.2s"/>
+
+      <!-- Section anchor nodes: Contact (spine + right root) -->
+      <circle class="section-node" cx="596" cy="3092" r="4" style="fill:#00c896;animation-delay:0.9s"/>
+      <circle class="section-node-outer" cx="596" cy="3092" r="13" style="fill:none;stroke:#00c896;stroke-width:0.6;animation-delay:0.9s"/>
+      <circle class="section-node" cx="1138" cy="3418" r="4" style="fill:#4db8d4;animation-delay:1.5s"/>
+      <circle class="section-node-outer" cx="1138" cy="3418" r="13" style="fill:none;stroke:#4db8d4;stroke-width:0.6;animation-delay:1.5s"/>
+
+      <!-- Animated drops: root-1 (jade) -->
+      <circle class="drop-1" r="2.5">
+        <animateMotion dur="10s" repeatCount="indefinite" begin="0s"><mpath href="#root-1"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="10s" repeatCount="indefinite" begin="0s"/>
+      </circle>
+      <circle class="drop-1" r="2">
+        <animateMotion dur="10s" repeatCount="indefinite" begin="5s"><mpath href="#root-1"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="10s" repeatCount="indefinite" begin="5s"/>
+      </circle>
+      <circle class="drop-1" r="1.5">
+        <animateMotion dur="10s" repeatCount="indefinite" begin="8s"><mpath href="#root-1"/></animateMotion>
+        <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.08;0.92;1" dur="10s" repeatCount="indefinite" begin="8s"/>
+      </circle>
+
+      <!-- Animated drops: root-2 (ocean) -->
+      <circle class="drop-2" r="2.5">
+        <animateMotion dur="13s" repeatCount="indefinite" begin="1s"><mpath href="#root-2"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.07;0.93;1" dur="13s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+      <circle class="drop-2" r="2">
+        <animateMotion dur="13s" repeatCount="indefinite" begin="5.5s"><mpath href="#root-2"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.07;0.93;1" dur="13s" repeatCount="indefinite" begin="5.5s"/>
+      </circle>
+      <circle class="drop-2" r="1.5">
+        <animateMotion dur="13s" repeatCount="indefinite" begin="10s"><mpath href="#root-2"/></animateMotion>
+        <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.07;0.93;1" dur="13s" repeatCount="indefinite" begin="10s"/>
+      </circle>
+
+      <!-- Animated drops: root-3 (gold) -->
+      <circle class="drop-3" r="2.5">
+        <animateMotion dur="13s" repeatCount="indefinite" begin="2s"><mpath href="#root-3"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.07;0.93;1" dur="13s" repeatCount="indefinite" begin="2s"/>
+      </circle>
+      <circle class="drop-3" r="2">
+        <animateMotion dur="13s" repeatCount="indefinite" begin="7.5s"><mpath href="#root-3"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.07;0.93;1" dur="13s" repeatCount="indefinite" begin="7.5s"/>
+      </circle>
+      <circle class="drop-3" r="1.5">
+        <animateMotion dur="13s" repeatCount="indefinite" begin="11s"><mpath href="#root-3"/></animateMotion>
+        <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.07;0.93;1" dur="13s" repeatCount="indefinite" begin="11s"/>
+      </circle>
+
+      <!-- Animated drops: root-4 (ocean deep) -->
+      <circle class="drop-4" r="3">
+        <animateMotion dur="18s" repeatCount="indefinite" begin="0.5s"><mpath href="#root-4"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="18s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+      <circle class="drop-4" r="2.5">
+        <animateMotion dur="18s" repeatCount="indefinite" begin="6.5s"><mpath href="#root-4"/></animateMotion>
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="18s" repeatCount="indefinite" begin="6.5s"/>
+      </circle>
+      <circle class="drop-4" r="2">
+        <animateMotion dur="18s" repeatCount="indefinite" begin="12.5s"><mpath href="#root-4"/></animateMotion>
+        <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.05;0.95;1" dur="18s" repeatCount="indefinite" begin="12.5s"/>
+      </circle>
+
+      <!-- Animated drops: root-5 (center spine) -->
+      <circle class="drop-1" r="2">
+        <animateMotion dur="15s" repeatCount="indefinite" begin="3s"><mpath href="#root-5"/></animateMotion>
+        <animate attributeName="opacity" values="0;0.8;0.8;0" keyTimes="0;0.06;0.94;1" dur="15s" repeatCount="indefinite" begin="3s"/>
+      </circle>
+      <circle class="drop-2" r="1.5">
+        <animateMotion dur="15s" repeatCount="indefinite" begin="10.5s"><mpath href="#root-5"/></animateMotion>
+        <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.94;1" dur="15s" repeatCount="indefinite" begin="10.5s"/>
+      </circle>
+
+      <!-- Trunk junction glow -->
+      <circle cx="600" cy="340" r="3" fill="#1a4a60" opacity="0.9"/>
+      <circle cx="600" cy="340" r="9" fill="none" stroke="#1a4a60" stroke-width="0.5" opacity="0.4"/>
+
+      <!-- Logo at apex -->
+      <circle cx="600" cy="25" r="51" fill="rgba(4,6,14,0.75)" stroke="rgba(0,200,150,0.45)" stroke-width="1.5"/>
+      <image href="images/logo.png" x="554" y="-21" width="92" height="92"
+             clip-path="url(#logo-clip)" filter="url(#logo-glow)"
+             preserveAspectRatio="xMidYMid meet"/>
+    </svg>
+  </div>
+
   <!-- MOON TRACKER -->
   <div class="moon-tracker" id="moon-tracker">
     <span class="moon-emoji">🌕</span>
@@ -22,101 +231,9 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-tree">
-      <svg viewBox="0 -30 1200 620" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-        <ellipse class="canopy-glow" cx="600" cy="70" rx="280" ry="60"/>
-        <g class="tree-canopy">
-          <g class="tree-line">
-            <path d="M 600 130 Q 520 100 430 70"/>
-            <path d="M 600 130 Q 680 100 770 70"/>
-            <path d="M 600 160 Q 500 140 380 110"/>
-            <path d="M 600 160 Q 700 140 820 110"/>
-            <path d="M 600 100 Q 560 70 520 40"/>
-            <path d="M 600 100 Q 640 70 680 40"/>
-            <path d="M 430 70 Q 400 55 360 50"/>
-            <path d="M 430 70 Q 420 45 400 30"/>
-            <path d="M 770 70 Q 800 55 840 50"/>
-            <path d="M 770 70 Q 780 45 800 30"/>
-            <path d="M 380 110 Q 340 100 310 90"/>
-            <path d="M 820 110 Q 860 100 890 90"/>
-          </g>
-          <g>
-            <circle class="leaf" cx="360" cy="50" r="2"/>
-            <circle class="leaf" cx="400" cy="30" r="1.5"/>
-            <circle class="leaf" cx="520" cy="40" r="2"/>
-            <circle class="leaf" cx="680" cy="40" r="2"/>
-            <circle class="leaf" cx="800" cy="30" r="1.5"/>
-            <circle class="leaf" cx="840" cy="50" r="2"/>
-            <circle class="leaf" cx="310" cy="90" r="1.5"/>
-            <circle class="leaf" cx="890" cy="90" r="1.5"/>
-            <circle class="leaf" cx="450" cy="60" r="1.2"/>
-            <circle class="leaf" cx="750" cy="60" r="1.2"/>
-            <circle class="leaf" cx="600" cy="20" r="2.5"/>
-            <circle class="leaf" cx="560" cy="50" r="1"/>
-            <circle class="leaf" cx="640" cy="50" r="1"/>
-            <circle class="leaf" cx="480" cy="90" r="1.2"/>
-            <circle class="leaf" cx="720" cy="90" r="1.2"/>
-          </g>
-          <circle class="pulse-drop" cx="430" cy="70" r="2" style="animation-delay:0s"/>
-          <circle class="pulse-drop" cx="770" cy="70" r="2" style="animation-delay:0.7s"/>
-          <circle class="pulse-drop" cx="600" cy="20" r="2" style="animation-delay:1.4s"/>
-          <circle class="pulse-drop" cx="380" cy="110" r="2" style="animation-delay:2.1s"/>
-          <circle class="pulse-drop" cx="820" cy="110" r="2" style="animation-delay:2.8s"/>
-        </g>
-        <path class="tree-trunk" d="M 600 130 L 600 340"/>
-        <g class="tree-line" opacity="0.3">
-          <path d="M 596 180 L 596 320" stroke-width="0.5"/>
-          <path d="M 604 200 L 604 310" stroke-width="0.5"/>
-        </g>
-        <text class="trunk-label" x="612" y="245">THE·SOURCE</text>
-        <path id="root-1" class="tree-line-bright root-path-1" d="M 600 340 Q 450 400 300 470 Q 200 510 150 590" stroke-width="1.4"/>
-        <path id="root-2" class="tree-line-bright root-path-2" d="M 600 340 Q 540 400 490 450 Q 460 490 450 590" stroke-width="1.4"/>
-        <path id="root-3" class="tree-line-bright root-path-3" d="M 600 340 Q 660 400 710 450 Q 740 490 750 590" stroke-width="1.4"/>
-        <path id="root-4" class="tree-line-bright root-path-4" d="M 600 340 Q 750 400 900 470 Q 1000 510 1050 590" stroke-width="1.6"/>
-        <g class="tree-line" opacity="0.4">
-          <path d="M 400 440 Q 350 460 320 490"/>
-          <path d="M 500 460 Q 510 490 490 510"/>
-          <path d="M 700 460 Q 690 490 710 510"/>
-          <path d="M 800 440 Q 850 460 880 490"/>
-        </g>
-        <circle cx="600" cy="340" r="3" fill="#1a4a60" opacity="0.9"/>
-        <circle cx="600" cy="340" r="9" fill="none" stroke="#1a4a60" stroke-width="0.5" opacity="0.4"/>
-        <circle class="drop-1" r="2.5">
-          <animateMotion dur="5s" repeatCount="indefinite" begin="0s"><mpath href="#root-1"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5s" repeatCount="indefinite" begin="0s"/>
-        </circle>
-        <circle class="drop-1" r="2">
-          <animateMotion dur="5s" repeatCount="indefinite" begin="2.5s"><mpath href="#root-1"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5s" repeatCount="indefinite" begin="2.5s"/>
-        </circle>
-        <circle class="drop-2" r="2.5">
-          <animateMotion dur="6s" repeatCount="indefinite" begin="1s"><mpath href="#root-2"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="1s"/>
-        </circle>
-        <circle class="drop-2" r="2">
-          <animateMotion dur="6s" repeatCount="indefinite" begin="4s"><mpath href="#root-2"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" repeatCount="indefinite" begin="4s"/>
-        </circle>
-        <circle class="drop-3" r="2.5">
-          <animateMotion dur="5.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#root-3"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="0.5s"/>
-        </circle>
-        <circle class="drop-3" r="2">
-          <animateMotion dur="5.5s" repeatCount="indefinite" begin="3s"><mpath href="#root-3"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="5.5s" repeatCount="indefinite" begin="3s"/>
-        </circle>
-        <circle class="drop-4" r="3">
-          <animateMotion dur="4.5s" repeatCount="indefinite" begin="0.2s"><mpath href="#root-4"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4.5s" repeatCount="indefinite" begin="0.2s"/>
-        </circle>
-        <circle class="drop-4" r="2">
-          <animateMotion dur="4.5s" repeatCount="indefinite" begin="2.2s"><mpath href="#root-4"/></animateMotion>
-          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="4.5s" repeatCount="indefinite" begin="2.2s"/>
-        </circle>
-      </svg>
-    </div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Artist · Writer · Lifewater</p>
+      <img src="images/logo.png" alt="Lifewater" class="hero-logo" />
+      <p class="hero-eyebrow">Artist · Business Operations Consultant · Natural Athlete</p>
       <h1 class="hero-title">
         <span class="name-dede">DeDe</span>
         <span class="name-lifewater">Lifewater</span>
@@ -125,8 +242,9 @@
         "We strive to be <span>Happy, Growing</span> &amp; Never Complain"
       </p>
       <div class="hero-cta">
-        <a href="#writing" class="btn-primary">Read the Words</a>
+        <a href="#videos" class="btn-primary">Watch the Videos</a>
         <a href="#connect" class="btn-secondary">Get in Touch</a>
+        <a href="https://www.buymeacoffee.com/dedelifewater" target="_blank" class="btn-coffee">☕ Buy Me a Coffee</a>
       </div>
     </div>
   </section>
@@ -171,29 +289,56 @@
     </div>
   </section>
 
+  <!-- VIDEOS -->
+  <section id="videos" class="reveal">
+    <span class="section-label">From the Channel</span>
+    <h2 class="section-title">Latest <span>Videos</span></h2>
+    <div class="section-divider"></div>
+    <div class="cards-grid">
+      <a href="https://www.youtube.com/watch?v=UhoEhsF-Dek" target="_blank" class="card video-thumb-card">
+        <div class="video-thumb-wrapper">
+          <img src="https://img.youtube.com/vi/UhoEhsF-Dek/mqdefault.jpg" alt="DeDe yapz #5 — Be Happy & Stop Complaining"/>
+          <div class="play-btn">▶</div>
+        </div>
+        <p class="card-tag">Life Philosophy · Lifestyle Vlog</p>
+        <h3>DeDe yapz #5 — Be Happy &amp; Stop Complaining</h3>
+        <p>On choosing happiness and cutting out the complaining for good.</p>
+        <div class="card-meta"><span>YouTube</span><span class="card-read-more">Watch →</span></div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=etDP9XXbK_4" target="_blank" class="card video-thumb-card">
+        <div class="video-thumb-wrapper">
+          <img src="https://img.youtube.com/vi/etDP9XXbK_4/mqdefault.jpg" alt="If You're an Overthinker: 4 Things I Personally Do"/>
+          <div class="play-btn">▶</div>
+        </div>
+        <p class="card-tag">Mindset</p>
+        <h3>If You're an Overthinker — 4 Things I Personally Do to Keep Moving Forward</h3>
+        <p>Practical tools for breaking out of the loop and staying in motion.</p>
+        <div class="card-meta"><span>YouTube</span><span class="card-read-more">Watch →</span></div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=Ya34Q0jsolE" target="_blank" class="card video-thumb-card">
+        <div class="video-thumb-wrapper">
+          <img src="https://img.youtube.com/vi/Ya34Q0jsolE/mqdefault.jpg" alt="I'm 31 — and I'd Subtract These 4 Things Before Life Gets Hard"/>
+          <div class="play-btn">▶</div>
+        </div>
+        <p class="card-tag">Mindset</p>
+        <h3>I'm 31 — and I'd Subtract These 4 Things Before Life Gets Hard</h3>
+        <p>Looking back with clarity — what to let go of before the weight compounds.</p>
+        <div class="card-meta"><span>YouTube</span><span class="card-read-more">Watch →</span></div>
+      </a>
+    </div>
+  </section>
+
   <!-- WRITING -->
   <section id="writing" class="reveal">
     <span class="section-label">From the Pages</span>
-    <h2 class="section-title">Writings &amp; <span>Reflections</span></h2>
+    <h2 class="section-title">Latest <span>Writing</span></h2>
     <div class="section-divider"></div>
     <div class="cards-grid">
-      <a href="#" class="card">
-        <p class="card-tag">Rap Journey</p>
-        <h3>Learning to Flow: Month One on the Mic</h3>
-        <p>What happens when you decide to learn rap from scratch? Honest reflections on the first steps, the awkward bars, and what's actually clicking.</p>
-        <div class="card-meta"><span>Apr 2026</span><span class="card-read-more">Read →</span></div>
-      </a>
-      <a href="#" class="card">
-        <p class="card-tag">Philosophy</p>
-        <h3>Become Like Water: Why Bruce Lee Changed How I See Music</h3>
-        <p>The philosophy that named this brand — and how it shapes every creative decision made under the Lifewater name.</p>
-        <div class="card-meta"><span>Apr 2026</span><span class="card-read-more">Read →</span></div>
-      </a>
-      <a href="#" class="card">
-        <p class="card-tag">Personal Brand</p>
-        <h3>Building Without a Blueprint: The DeDe Lifewater Origin</h3>
-        <p>No manager, no label, no roadmap. Just a vision and the tools available. Here's what that actually looks like day to day.</p>
-        <div class="card-meta"><span>Apr 2026</span><span class="card-read-more">Read →</span></div>
+      <a href="posts/2026-04-21-hi-im-dede.html" class="card">
+        <p class="card-tag">Introduction · Apr 21, 2026</p>
+        <h3>Hi, I'm DeDe</h3>
+        <p>Brisbane native building a new path. On gratitude, willpower, and why I follow God's plan over my heart.</p>
+        <div class="card-meta"><span>Personal</span><span class="card-read-more">Read →</span></div>
       </a>
     </div>
   </section>
@@ -227,7 +372,7 @@
         <div class="contact-detail">
           <div>
             <div style="font-size:0.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem;">Music</div>
-            <a href="https://www.bandlab.com" target="_blank">BandLab →</a>
+            <a href="https://www.bandlab.com/dedelifewater" target="_blank">BandLab →</a>
           </div>
         </div>
         <div class="contact-detail" style="border:none;">
@@ -285,10 +430,12 @@
     <p class="footer-tagline">"We strive to be Happy, Growing &amp; Never Complain"</p>
     <div class="footer-links">
       <a href="#about">About</a>
+      <a href="#videos">Videos</a>
       <a href="#writing">Writing</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#connect">Contact</a>
       <a href="mailto:dedelifewater@proton.me">Email</a>
+      <a href="https://www.buymeacoffee.com/dedelifewater" target="_blank" style="color:#f4b400;">☕ Support</a>
     </div>
     <div class="footer-bottom">&copy; 2026 DeDe Lifewater. All rights reserved.</div>
   </footer>
