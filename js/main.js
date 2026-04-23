@@ -381,10 +381,10 @@ if (canvas) {
   if (!svg || !div) return;
 
   function resize() {
+    div.style.height = '0'; // collapse first so SVG doesn't inflate the measurement
     const pageH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
     const pageW = window.innerWidth || 1;
     div.style.height = pageH + 'px';
-    // Map pixel height to SVG coordinate units (SVG is 1200 units wide)
     const svgH = Math.ceil((pageH / pageW) * 1200) + 100;
     svg.setAttribute('viewBox', '0 -30 1200 ' + svgH);
   }
