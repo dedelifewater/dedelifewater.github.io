@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifewater OS — DeDe Lifewater</title>
+<meta name="description" content="Lifewater OS — personal agenda dashboard. Focus timer, session checks, project tracker. Built via Claude AI sessions." />
+<style>
+:root {
+  --dede-dark: rgba(10,15,10,0.25);
+  --dede-surface: rgba(17,23,17,0.55);
+  --dede-card: rgba(22,30,22,0.45);
+  --dede-border: rgba(99,153,34,0.18);
+  --dede-green: #639922;
+  --dede-green-bright: #97c459;
+  --dede-green-dim: #3B6D11;
+  --dede-water: #185FA5;
+  --dede-water-dim: #0C447C;
+  --dede-text: #d3d1c7;
+  --dede-muted: #888780;
+  --dede-amber: #EF9F27;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #070c07;
+  color: var(--dede-text);
+  font-family: 'Courier New', monospace;
+  min-height: 100vh;
+}
+.os-header {
+  background: rgba(17,23,17,0.55);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--dede-border);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.os-logo { font-size: 13px; font-weight: bold; color: var(--dede-green-bright); letter-spacing: 2px; }
+.os-sub { font-size: 10px; color: var(--dede-muted); letter-spacing: 1px; }
+.os-date { font-size: 11px; color: var(--dede-muted); text-align: right; }
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 14px 16px;
+}
+.card {
+  background: var(--dede-card);
+  border: 1px solid var(--dede-border);
+  border-radius: 6px;
+  padding: 14px;
+}
+.card-wide { grid-column: span 2; }
+.card-full { grid-column: span 3; }
+.card-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--dede-green);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.card-label::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--dede-green);
+  border-radius: 50%;
+}
+.card-label.blue { color: #378ADD; }
+.card-label.blue::before { background: #378ADD; }
+.project-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(99,153,34,0.08);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.project-row:last-child { border-bottom: none; }
+.project-row:hover { padding-left: 4px; }
+.project-name { font-size: 12px; color: var(--dede-text); letter-spacing: 0.5px; }
+.project-tag {
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+.tag-music { background: rgba(24,95,165,0.2); color: #378ADD; border: 1px solid rgba(24,95,165,0.3); }
+.tag-web { background: rgba(99,153,34,0.2); color: var(--dede-green-bright); border: 1px solid var(--dede-border); }
+.tag-content { background: rgba(239,159,39,0.15); color: var(--dede-amber); border: 1px solid rgba(239,159,39,0.25); }
+.tag-body { background: rgba(59,109,17,0.25); color: #c0dd97; border: 1px solid rgba(99,153,34,0.2); }
+.tag-biz { background: rgba(83,74,183,0.2); color: #AFA9EC; border: 1px solid rgba(83,74,183,0.25); }
+.tag-linux { background: rgba(136,135,128,0.2); color: #b4b2a9; border: 1px solid rgba(136,135,128,0.2); }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; }
+.dot-active { background: var(--dede-green-bright); box-shadow: 0 0 4px var(--dede-green); }
+.dot-slow { background: var(--dede-amber); }
+.dot-seed { background: var(--dede-muted); }
+.session-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.session-cell {
+  background: rgba(99,153,34,0.06);
+  border: 1px solid var(--dede-border);
+  border-radius: 4px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.session-cell:hover, .session-cell.done {
+  background: rgba(99,153,34,0.15);
+  border-color: var(--dede-green);
+}
+.session-cell.done .check-icon { color: var(--dede-green-bright); }
+.session-cell.done .s-label { color: var(--dede-text); }
+.check-icon { font-size: 14px; color: var(--dede-muted); margin-bottom: 3px; }
+.s-label { font-size: 9px; color: var(--dede-muted); letter-spacing: 0.8px; line-height: 1.4; }
+.stat-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.stat-pill {
+  background: rgba(99,153,34,0.08);
+  border: 1px solid var(--dede-border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  text-align: center;
+  flex: 1;
+}
+.stat-pill.blue-pill { background: rgba(24,95,165,0.08); border-color: rgba(24,95,165,0.2); }
+.stat-val { font-size: 18px; font-weight: bold; color: var(--dede-green-bright); line-height: 1; }
+.stat-key { font-size: 9px; color: var(--dede-muted); margin-top: 3px; letter-spacing: 0.8px; }
+.mantra-box {
+  background: rgba(24,95,165,0.08);
+  border: 1px solid rgba(24,95,165,0.2);
+  border-left: 3px solid var(--dede-water);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 11px;
+  color: #B5D4F4;
+  font-style: italic;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+.add-btn {
+  background: transparent;
+  border: 1px dashed var(--dede-border);
+  color: var(--dede-muted);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 8px;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+}
+.add-btn:hover { border-color: var(--dede-green); color: var(--dede-green-bright); }
+.focus-timer { text-align: center; padding: 10px 0; }
+.timer-display { font-size: 32px; font-weight: bold; color: var(--dede-green-bright); letter-spacing: 3px; line-height: 1; margin-bottom: 8px; }
+.timer-label { font-size: 9px; color: var(--dede-muted); letter-spacing: 2px; margin-bottom: 12px; }
+.timer-btns { display: flex; gap: 6px; justify-content: center; }
+.t-btn {
+  background: transparent;
+  border: 1px solid var(--dede-border);
+  color: var(--dede-muted);
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+}
+.t-btn:hover { border-color: var(--dede-green); color: var(--dede-green-bright); }
+.t-btn.running { border-color: var(--dede-green); color: var(--dede-green-bright); background: rgba(99,153,34,0.1); }
+.os-footer {
+  background: rgba(17,23,17,0.55);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--dede-border);
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-msg { font-size: 10px; color: var(--dede-muted); letter-spacing: 0.5px; }
+.footer-link { font-size: 10px; color: var(--dede-green); cursor: pointer; letter-spacing: 1px; text-decoration: none; }
+.footer-link:hover { color: var(--dede-green-bright); }
+.preview-lock { position: relative; overflow: hidden; }
+.preview-lock > .preview-locked-content {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+}
+.preview-lock::after {
+  content: "PREVIEW — LIVE DATA HIDDEN";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--dede-green-bright);
+  background: rgba(10,15,10,0.35);
+  backdrop-filter: blur(2px);
+  border: 1px dashed var(--dede-border);
+  border-radius: 4px;
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.wip-banner {
+  background: rgba(200,124,42,0.1);
+  border-bottom: 1px solid rgba(200,124,42,0.3);
+  color: #ef9f27;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 6px 12px;
+}
+.wip-banner a {
+  color: var(--dede-green-bright);
+  text-decoration: none;
+  margin-left: 8px;
+  letter-spacing: 1px;
+}
+.wip-banner a:hover { color: #fff; }
+.pl-bar-wrap { margin: 8px 0; }
+.pl-bar-label { display: flex; justify-content: space-between; font-size: 10px; color: var(--dede-muted); margin-bottom: 4px; }
+.pl-bar-track { background: rgba(99,153,34,0.08); border-radius: 2px; height: 5px; }
+.pl-bar-fill { background: var(--dede-green); height: 5px; border-radius: 2px; transition: width 0.4s ease; }
+.pl-bar-fill.water { background: var(--dede-water); }
+.pl-bar-fill.amber { background: var(--dede-amber); }
+.stripe-card {
+  background: rgba(24,95,165,0.06);
+  border: 1px solid rgba(24,95,165,0.2);
+  border-radius: 6px;
+  padding: 14px;
+}
+.session-cell.preview-disabled { cursor: default; opacity: 0.7; }
+.session-cell.preview-disabled:hover { background: rgba(99,153,34,0.06); border-color: var(--dede-border); }
+.t-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+.t-btn[disabled]:hover { background: transparent; border-color: var(--dede-border); color: var(--dede-muted); }
+
+/* ── LIGHT BEAM BORDER ANIMATION ── */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes beamSpin {
+  0%   { --beam-angle: 0deg; }
+  100% { --beam-angle: 360deg; }
+}
+.card, .stripe-card {
+  position: relative;
+  overflow: hidden;
+}
+.card::before, .stripe-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    var(--beam-angle, 0deg),
+    transparent 0%, transparent 35%,
+    rgba(151,196,89,0.8) 45%, rgba(255,255,255,0.9) 50%, rgba(151,196,89,0.8) 55%,
+    transparent 65%, transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beamSpin 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.card > *, .stripe-card > * {
+  position: relative;
+  z-index: 1;
+}
+@property --beam-angle-blue {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes beamSpinBlue {
+  0%   { --beam-angle: 0deg; }
+  100% { --beam-angle: 360deg; }
+}
+.stripe-card::before {
+  background: linear-gradient(
+    var(--beam-angle, 0deg),
+    transparent 0%, transparent 35%,
+    rgba(24,95,165,0.7) 45%, rgba(181,212,244,0.9) 50%, rgba(24,95,165,0.7) 55%,
+    transparent 65%, transparent 100%
+  );
+  animation: beamSpinBlue 10s linear infinite;
+}
+
+@media (max-width: 700px) {
+  .main-grid { grid-template-columns: 1fr; }
+  .card-wide, .card-full { grid-column: span 1; }
+  .session-block { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wip-banner">
+  LIFEWATER OS // AGENDA DASHBOARD — v0.1 WIP
+  <a href="wip.html">← Apps Lab</a>
+</div>
+
+<canvas id="zodiacCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;"></canvas>
+
+<div style="position:relative;z-index:1;">
+<div class="os-header">
+  <div class="logo-wrap">
+    <div>
+      <div class="os-logo">DEDE.LIFEWATER // AGENDA OS</div>
+      <div class="os-sub">We Strive to Be Happy, Growing &amp; Never Complain — MMXXVI</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div class="os-date" id="headerDate"></div>
+    <a href="index.html" title="main site" style="
+      display:flex;align-items:center;gap:5px;
+      text-decoration:none;
+      color:var(--dede-muted);
+      font-size:10px;
+      letter-spacing:1px;
+      border: 1px solid rgba(99,153,34,0.2);
+      padding:5px 10px;
+      border-radius:20px;
+      transition:all 0.15s;
+      white-space:nowrap;
+    " onmouseover="this.style.color='var(--dede-green-bright)';this.style.borderColor='var(--dede-green)';this.style.background='rgba(99,153,34,0.08)'" onmouseout="this.style.color='var(--dede-muted)';this.style.borderColor='rgba(99,153,34,0.2)';this.style.background='transparent'">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      dedelifewater.github.io
+    </a>
+  </div>
+</div>
+
+<div id="zone-overview">
+  <div class="main-grid">
+    <div class="card">
+      <div class="card-label">focus timer</div>
+      <div class="focus-timer">
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-label" id="timerLabel">DEEP WORK</div>
+        <div class="timer-btns">
+          <button class="t-btn" id="timerBtn" onclick="toggleTimer()">START</button>
+          <button class="t-btn" onclick="resetTimer()">RESET</button>
+        </div>
+      </div>
+      <div style="margin-top:10px;">
+        <div style="font-size:9px;color:var(--dede-muted);letter-spacing:1px;margin-bottom:5px;">MODE</div>
+        <div style="display:flex;gap:4px;">
+          <button class="t-btn" style="flex:1;font-size:9px;" onclick="setMode(25,'DEEP WORK')">25m</button>
+          <button class="t-btn" style="flex:1;font-size:9px;" onclick="setMode(52,'FLOW STATE')">52m</button>
+          <button class="t-btn" style="flex:1;font-size:9px;" onclick="setMode(5,'BREAK')">5m</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-wide">
+      <div class="card-label">today's session checks</div>
+      <div class="session-block">
+        <div class="session-cell" id="sc-rap" onclick="toggleCheck(this,'ci-rap')"><div class="check-icon" id="ci-rap">○</div><div class="s-label">RAP / LYRICS</div></div>
+        <div class="session-cell" id="sc-record" onclick="toggleCheck(this,'ci-record')"><div class="check-icon" id="ci-record">○</div><div class="s-label">RECORD / TAKE</div></div>
+        <div class="session-cell" id="sc-train" onclick="toggleCheck(this,'ci-train')"><div class="check-icon" id="ci-train">○</div><div class="s-label">TRAINING</div></div>
+        <div class="session-cell" id="sc-ig" onclick="toggleCheck(this,'ci-ig')"><div class="check-icon" id="ci-ig">○</div><div class="s-label">@EMPERORDEDE</div></div>
+        <div class="session-cell" id="sc-essay" onclick="toggleCheck(this,'ci-essay')"><div class="check-icon" id="ci-essay">○</div><div class="s-label">ESSAY / SCRIPT</div></div>
+        <div class="session-cell" id="sc-learn" onclick="toggleCheck(this,'ci-learn')"><div class="check-icon" id="ci-learn">○</div><div class="s-label">LINUX / LEARN</div></div>
+        <div class="session-cell" id="sc-money" onclick="toggleCheck(this,'ci-money')"><div class="check-icon" id="ci-money">○</div><div class="s-label">WEALTH MOVE</div></div>
+      </div>
+      <div style="font-size:10px;color:var(--dede-muted);text-align:right;" id="checkCount">0 / 7 done today</div>
+    </div>
+
+    <div class="card card-full preview-lock">
+      <div class="card-label">active zones</div>
+      <div class="preview-locked-content" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+        <div>
+          <div style="font-size:9px;color:var(--dede-green);letter-spacing:1px;margin-bottom:6px;padding-bottom:4px;border-bottom: 1px solid var(--dede-border);">MUSIC</div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-active"></div><div class="project-name">LIFEWATER (album)</div></div><div class="project-tag tag-music">ACTIVE</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-active"></div><div class="project-name">lyrics / writing</div></div><div class="project-tag tag-music">DAILY</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-slow"></div><div class="project-name">beat hunting</div></div><div class="project-tag tag-music">NO PROD</div></div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--dede-green);letter-spacing:1px;margin-bottom:6px;padding-bottom:4px;border-bottom: 1px solid var(--dede-border);">CONTENT + WEB</div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-active"></div><div class="project-name">dedelifewater.github.io</div></div><div class="project-tag tag-web">LIVE</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-slow"></div><div class="project-name">youtube uploads</div></div><div class="project-tag tag-content">GROWING</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-slow"></div><div class="project-name">instagram funnel</div></div><div class="project-tag tag-content">SLOW</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-active"></div><div class="project-name">essays + scripts</div></div><div class="project-tag tag-content">WIP</div></div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--dede-green);letter-spacing:1px;margin-bottom:6px;padding-bottom:4px;border-bottom: 1px solid var(--dede-border);">BODY + BIZ</div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-active"></div><div class="project-name">training (boostcamp)</div></div><div class="project-tag tag-body">TRACKED</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-active"></div><div class="project-name">biz ops consulting</div></div><div class="project-tag tag-biz">BUILDING</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-slow"></div><div class="project-name">centrelink + cert III</div></div><div class="project-tag tag-biz">PENDING</div></div>
+          <div class="project-row"><div style="display:flex;align-items:center;"><div class="status-dot dot-seed"></div><div class="project-name">linux + open source</div></div><div class="project-tag tag-linux">LEARNING</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-wide preview-lock">
+      <div class="card-label">wealth tracker — road to $100k AUD</div>
+      <div class="preview-locked-content">
+        <div class="stat-row">
+          <div class="stat-pill"><div class="stat-val">$100k</div><div class="stat-key">TARGET</div></div>
+          <div class="stat-pill"><div class="stat-val" style="color:var(--dede-amber);">2026</div><div class="stat-key">TIMELINE</div></div>
+          <div class="stat-pill"><div class="stat-val" style="color:var(--dede-water);font-size:14px;">SOLE TRADER</div><div class="stat-key">STRUCTURE</div></div>
+        </div>
+        <div class="pl-bar-wrap"><div class="pl-bar-label"><span>income sources</span><span style="color:var(--dede-green);">building</span></div><div class="pl-bar-track"><div class="pl-bar-fill water" style="width:15%"></div></div></div>
+        <div class="pl-bar-wrap"><div class="pl-bar-label"><span>brand + audience</span><span style="color:var(--dede-amber);">early</span></div><div class="pl-bar-track"><div class="pl-bar-fill amber" style="width:20%"></div></div></div>
+        <div class="pl-bar-wrap"><div class="pl-bar-label"><span>catalogue built</span><span style="color:var(--dede-green);">11 tracks</span></div><div class="pl-bar-track"><div class="pl-bar-fill" style="width:60%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">water principle</div>
+      <div class="mantra-box">"Water doesn't force. It finds the way."</div>
+      <div style="margin-top:10px;font-size:9px;color:var(--dede-muted);letter-spacing:1px;line-height:1.6;">discipline → growth → freedom<br>roots deep. flow forward.</div>
+    </div>
+  </div>
+</div>
+
+<div class="os-footer">
+  <div class="footer-msg" id="footerStatus">LIFEWATER OS // session active</div>
+  <a class="footer-link" href="wip.html">← Apps Lab</a>
+</div>
+</div>
+
+<script>
+// Brisbane clock
+function updateBrisbaneClock() {
+  const now = new Date();
+  const brisbane = new Date(now.toLocaleString('en-US', {timeZone: 'Australia/Brisbane'}));
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const h = brisbane.getHours().toString().padStart(2,'0');
+  const m = brisbane.getMinutes().toString().padStart(2,'0');
+  const s = brisbane.getSeconds().toString().padStart(2,'0');
+  document.getElementById('headerDate').innerHTML =
+    days[brisbane.getDay()] + ' ' + brisbane.getDate() + ' ' + months[brisbane.getMonth()] + ' ' + brisbane.getFullYear() + ' // BNE<br>' +
+    '<span style="font-size:14px;color:var(--dede-green-bright);letter-spacing:2px;">' + h + ':' + m + ':' + s + '</span>';
+}
+updateBrisbaneClock();
+setInterval(updateBrisbaneClock, 1000);
+
+// Focus timer
+let timerInterval = null, timerRunning = false, timerSeconds = 25 * 60, timerMode = 'DEEP WORK';
+function updateTimerDisplay() {
+  const m = Math.floor(timerSeconds / 60).toString().padStart(2,'0');
+  const s = (timerSeconds % 60).toString().padStart(2,'0');
+  document.getElementById('timerDisplay').textContent = m + ':' + s;
+  document.getElementById('timerLabel').textContent = timerMode;
+}
+function toggleTimer() {
+  const btn = document.getElementById('timerBtn');
+  if (!timerRunning) {
+    timerRunning = true;
+    btn.textContent = 'PAUSE';
+    btn.classList.add('running');
+    timerInterval = setInterval(() => {
+      if (timerSeconds > 0) { timerSeconds--; updateTimerDisplay(); }
+      else { clearInterval(timerInterval); timerRunning = false; btn.textContent = 'START'; btn.classList.remove('running'); }
+    }, 1000);
+  } else {
+    timerRunning = false;
+    clearInterval(timerInterval);
+    btn.textContent = 'RESUME';
+    btn.classList.remove('running');
+  }
+}
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  const btn = document.getElementById('timerBtn');
+  btn.textContent = 'START';
+  btn.classList.remove('running');
+  const modeMap = {'DEEP WORK':25,'FLOW STATE':52,'BREAK':5};
+  timerSeconds = (modeMap[timerMode] || 25) * 60;
+  updateTimerDisplay();
+}
+function setMode(mins, label) {
+  timerMode = label;
+  timerSeconds = mins * 60;
+  clearInterval(timerInterval);
+  timerRunning = false;
+  const btn = document.getElementById('timerBtn');
+  btn.textContent = 'START';
+  btn.classList.remove('running');
+  updateTimerDisplay();
+}
+
+// Session checks
+let checksDone = 0;
+function toggleCheck(cell, iconId) {
+  const isDone = cell.classList.contains('done');
+  cell.classList.toggle('done');
+  document.getElementById(iconId).textContent = isDone ? '○' : '✓';
+  checksDone += isDone ? -1 : 1;
+  document.getElementById('checkCount').textContent = checksDone + ' / 7 done today';
+}
+
+// Zodiac ambient canvas
+(function initZodiac() {
+  const canvas = document.getElementById('zodiacCanvas');
+  const ctx = canvas.getContext('2d');
+  const ZODIACS = [
+    { name:'Aries', stars:[[0.1,0.3],[0.25,0.2],[0.4,0.25],[0.5,0.15]], lines:[[0,1],[1,2],[2,3]] },
+    { name:'Taurus', stars:[[0.1,0.5],[0.2,0.3],[0.35,0.2],[0.5,0.3],[0.4,0.5],[0.55,0.55]], lines:[[0,1],[1,2],[2,3],[3,4],[4,0],[3,5]] },
+    { name:'Gemini', stars:[[0.1,0.1],[0.15,0.4],[0.4,0.1],[0.4,0.4],[0.25,0.55],[0.5,0.55]], lines:[[0,1],[2,3],[0,2],[1,4],[3,5],[4,5]] },
+    { name:'Cancer', stars:[[0.2,0.2],[0.4,0.15],[0.5,0.35],[0.35,0.5],[0.15,0.45]], lines:[[0,1],[1,2],[2,3],[3,4],[4,0]] },
+    { name:'Leo', stars:[[0.1,0.5],[0.2,0.3],[0.35,0.15],[0.5,0.2],[0.6,0.35],[0.55,0.55],[0.3,0.55]], lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[1,6]] },
+    { name:'Virgo', stars:[[0.1,0.2],[0.25,0.1],[0.4,0.15],[0.5,0.3],[0.45,0.5],[0.3,0.6],[0.15,0.55]], lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0]] },
+    { name:'Libra', stars:[[0.2,0.2],[0.45,0.2],[0.55,0.45],[0.3,0.55],[0.1,0.45]], lines:[[0,1],[1,2],[2,3],[3,4],[4,0],[0,3]] },
+    { name:'Scorpio', stars:[[0.05,0.3],[0.2,0.2],[0.35,0.25],[0.5,0.2],[0.6,0.35],[0.55,0.5],[0.45,0.6],[0.4,0.75],[0.5,0.8]], lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]] },
+    { name:'Sagittarius', stars:[[0.15,0.5],[0.3,0.35],[0.5,0.3],[0.6,0.15],[0.45,0.55],[0.6,0.6]], lines:[[0,1],[1,2],[2,3],[2,4],[4,5],[5,3]] },
+    { name:'Capricorn', stars:[[0.1,0.3],[0.3,0.15],[0.5,0.2],[0.55,0.4],[0.4,0.55],[0.2,0.55]], lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0]] },
+    { name:'Aquarius', stars:[[0.1,0.4],[0.25,0.25],[0.4,0.3],[0.55,0.2],[0.65,0.35],[0.5,0.5],[0.3,0.55]], lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,2]] },
+    { name:'Pisces', stars:[[0.1,0.2],[0.3,0.15],[0.4,0.3],[0.25,0.45],[0.1,0.5],[0.5,0.25],[0.65,0.35],[0.55,0.5],[0.4,0.55]], lines:[[0,1],[1,2],[2,3],[3,4],[4,0],[5,6],[6,7],[7,8],[8,5],[2,5]] },
+  ];
+  const POSITIONS = [
+    [0.05,0.02],[0.22,0.08],[0.42,0.01],[0.62,0.05],[0.80,0.01],[0.88,0.15],
+    [0.02,0.35],[0.15,0.55],[0.35,0.45],[0.55,0.52],[0.72,0.40],[0.85,0.55]
+  ];
+  let W, H, stars = [], frame = 0;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    stars = [];
+    for (let i = 0; i < 180; i++) {
+      stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.2+0.2, a: Math.random(), speed: Math.random()*0.003+0.001 });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    frame++;
+    stars.forEach(s => {
+      s.a = 0.2 + 0.5 * Math.abs(Math.sin(frame * s.speed));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(151,196,89,${s.a * 0.4})`;
+      ctx.fill();
+    });
+    ZODIACS.forEach((z, i) => {
+      const [px, py] = POSITIONS[i];
+      const scale = Math.min(W, H) * 0.13;
+      const ox = px * W, oy = py * H;
+      const pulse = 0.6 + 0.15 * Math.sin(frame * 0.008 + i);
+      ctx.strokeStyle = `rgba(59,109,17,${pulse * 0.7})`;
+      ctx.lineWidth = 0.8;
+      ctx.setLineDash([3,4]);
+      z.lines.forEach(([a,b]) => {
+        ctx.beginPath();
+        ctx.moveTo(ox + z.stars[a][0]*scale, oy + z.stars[a][1]*scale);
+        ctx.lineTo(ox + z.stars[b][0]*scale, oy + z.stars[b][1]*scale);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+      z.stars.forEach(([sx,sy], si) => {
+        const cx = ox + sx*scale, cy = oy + sy*scale;
+        const r = si===0 ? 2.5 : 1.5;
+        const sp = 0.5 + 0.3 * Math.sin(frame * 0.012 + si + i);
+        const g = ctx.createRadialGradient(cx,cy,0,cx,cy,r*4);
+        g.addColorStop(0, `rgba(151,196,89,${sp*0.4})`);
+        g.addColorStop(1, 'rgba(151,196,89,0)');
+        ctx.beginPath(); ctx.arc(cx,cy,r*4,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+        ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fillStyle=`rgba(151,196,89,${sp*0.9})`; ctx.fill();
+      });
+      ctx.fillStyle = `rgba(99,153,34,${pulse*0.5})`;
+      ctx.font = '8px Courier New';
+      ctx.fillText(z.name.toUpperCase(), ox + 0.3*scale, oy + scale + 10);
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+</script>
+</body>
+</html>

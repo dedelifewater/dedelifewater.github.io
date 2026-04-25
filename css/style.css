@@ -787,6 +787,28 @@ footer {
   box-shadow: 0 0 20px rgba(244,180,0,0.3);
 }
 
+.btn-wip {
+  padding: 0.7rem 1.8rem;
+  background: transparent;
+  border: 1px solid #c87c2a;
+  color: #c87c2a;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.btn-wip:hover {
+  background: rgba(200, 124, 42, 0.12);
+  border-color: #ef9f27;
+  color: #ef9f27;
+  box-shadow: 0 0 20px rgba(200, 124, 42, 0.25);
+}
+
 /* ── VIDEO CARDS ── */
 .video-wrapper {
   position: relative;
@@ -916,7 +938,7 @@ footer {
 @media (max-width: 480px) {
   .hero-title { font-size: clamp(2rem, 12vw, 3rem); }
   .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
-  .btn-primary, .btn-secondary, .btn-coffee { padding: 0.65rem 1.2rem; font-size: 0.75rem; }
+  .btn-primary, .btn-secondary, .btn-coffee, .btn-wip { padding: 0.65rem 1.2rem; font-size: 0.75rem; }
   section { padding: 2.5rem 1rem; }
   .newsletter-section { padding: 2rem 1rem; }
   .pillar { padding: 1rem; }
