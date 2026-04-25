@@ -21,6 +21,27 @@
           <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0  0 0.784 0.588 0 0  0 0 0 0 0  0 0 0 0.75 0" result="coloredBlur"/>
           <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
+
+        <!-- 3D trunk: cylindrical lighting, dark edges + teal highlight centre -->
+        <linearGradient id="trunk-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#010407"/>
+          <stop offset="16%"  stop-color="#05141e"/>
+          <stop offset="36%"  stop-color="#103e5c"/>
+          <stop offset="52%"  stop-color="#0c3048"/>
+          <stop offset="72%"  stop-color="#040f1a"/>
+          <stop offset="100%" stop-color="#010306"/>
+        </linearGradient>
+
+        <!-- Root depth: blurred shadow beneath each root -->
+        <filter id="root-depth" x="-12%" y="-8%" width="124%" height="116%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.8"/>
+        </filter>
+
+        <!-- Subtle ambient glow at root crown -->
+        <radialGradient id="crown-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#1a5070" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#1a5070" stop-opacity="0"/>
+        </radialGradient>
       </defs>
 
       <!-- Canopy -->
@@ -64,66 +85,272 @@
         <circle class="pulse-drop" cx="820" cy="110" r="2" style="animation-delay:2.8s"/>
       </g>
 
-      <!-- Trunk -->
-      <path class="tree-trunk" d="M 600 130 L 600 340"/>
-      <g class="tree-line" opacity="0.3">
-        <path d="M 596 180 L 596 320" stroke-width="0.5"/>
-        <path d="M 604 200 L 604 310" stroke-width="0.5"/>
+      <!-- 3D TRUNK ─ organic tapered body, connects logo at y=76 down to root crown at y=341 -->
+      <g id="trunk-3d">
+        <!-- Outer shadow: slightly wider, grounds the trunk in dark -->
+        <path fill="#020912" opacity="0.52"
+          d="M 594 76
+             C 593 115 591 175 589 250
+             C 588 290 587 315 585 341
+             L 615 341
+             C 612 315 612 290 611 250
+             C 609 175 607 115 606 76 Z"/>
+
+        <!-- Main trunk body: tapered, organic S-lean, gradient-lit cylinder -->
+        <!-- Narrow at logo (x 596–604), wide at root crown (x 587–613) -->
+        <path fill="url(#trunk-grad)"
+          d="M 596 76
+             C 595 115 593 175 591 250
+             C 590 290 589 315 587 341
+             L 613 341
+             C 610 315 610 290 609 250
+             C 607 175 605 115 604 76 Z"/>
+
+        <!-- Bark horizontal ridges — 14 rings, alternating bow direction -->
+        <g stroke="#03111c" stroke-width="0.72" fill="none" stroke-linecap="round" opacity="0.88">
+          <path d="M 595 88  Q 600 91  605 88"/>
+          <path d="M 595 106 Q 600 103 605 106"/>
+          <path d="M 594 124 Q 600 127 606 124"/>
+          <path d="M 594 143 Q 600 140 606 143"/>
+          <path d="M 593 162 Q 600 165 607 162"/>
+          <path d="M 593 181 Q 600 178 607 181"/>
+          <path d="M 592 201 Q 600 204 608 201"/>
+          <path d="M 592 221 Q 600 218 608 221"/>
+          <path d="M 591 242 Q 600 245 609 242"/>
+          <path d="M 591 262 Q 600 259 609 262"/>
+          <path d="M 590 282 Q 600 285 610 282"/>
+          <path d="M 590 302 Q 600 299 610 302"/>
+          <path d="M 589 320 Q 600 323 611 320"/>
+          <path d="M 589 337 Q 600 334 611 337"/>
+        </g>
+
+        <!-- Vertical bark grain — natural wood fibres -->
+        <g stroke="#0a2535" stroke-width="0.4" fill="none" opacity="0.62">
+          <path d="M 596 78  C 596 140 595 205 594 275 C 594 300 593 318 592 340"/>
+          <path d="M 599 76  C 599 140 598 210 597 278 C 597 308 597 326 597 340"/>
+          <path d="M 601 76  C 601 140 602 210 603 278 C 603 308 603 326 603 340"/>
+          <path d="M 605 78  C 605 140 606 205 607 275 C 607 300 608 318 609 340"/>
+        </g>
+
+        <!-- Primary highlight: left-of-centre (light source upper-left) -->
+        <path d="M 598 78 C 597 140 597 200 596 275 C 595 305 595 320 595 340"
+          stroke="rgba(35,120,175,0.52)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+        <!-- Secondary reflected highlight: right edge -->
+        <path d="M 608 78 C 608 140 609 200 610 275 C 610 305 611 320 611 340"
+          stroke="rgba(18,60,90,0.2)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
       </g>
-      <text class="trunk-label" x="612" y="245">THE·SOURCE</text>
 
-      <!-- Extended roots flowing through all page sections -->
-      <!-- Root 1: jade — sweeps far left → About section -->
+      <!-- Root crown — organic spread where trunk meets ground -->
+      <g id="root-crown" fill="none" stroke-linecap="round">
+        <!-- Wide dark base shadow to anchor the crown -->
+        <ellipse cx="600" cy="341" rx="32" ry="7" fill="url(#crown-glow)" opacity="0.7"/>
+        <!-- Short buttress roots fanning left -->
+        <path stroke="#030e18" stroke-width="5" opacity="0.45"
+          d="M 591 338 Q 568 348 548 356"/>
+        <path stroke="#030e18" stroke-width="4" opacity="0.35"
+          d="M 589 340 Q 571 352 558 364"/>
+        <!-- Short buttress roots fanning right -->
+        <path stroke="#030e18" stroke-width="5" opacity="0.45"
+          d="M 609 338 Q 632 348 652 356"/>
+        <path stroke="#030e18" stroke-width="4" opacity="0.35"
+          d="M 611 340 Q 629 352 642 364"/>
+        <!-- Surface micro-roots (visible grain) -->
+        <path stroke="#0d3a55" stroke-width="1.4" opacity="0.5"
+          d="M 590 337 Q 575 346 562 353"/>
+        <path stroke="#0d3a55" stroke-width="1.2" opacity="0.4"
+          d="M 590 340 Q 578 350 568 360"/>
+        <path stroke="#0d3a55" stroke-width="1.4" opacity="0.5"
+          d="M 610 337 Q 625 346 638 353"/>
+        <path stroke="#0d3a55" stroke-width="1.2" opacity="0.4"
+          d="M 610 340 Q 622 350 632 360"/>
+      </g>
+
+      <text class="trunk-label" x="614" y="245">THE·SOURCE</text>
+
+      <!-- ═══ ROOT SYSTEM — organic C-curves, 3D layered: shadow / body / highlight ═══ -->
+
+      <!-- ── ROOT SHADOW PASS (dark blurred underlay — depth) ── -->
+      <path class="root-shadow" stroke-width="7" filter="url(#root-depth)"
+        d="M 600 341 C 558 378 494 404 400 454 C 318 498 242 552 164 628 C 96 696 38 778 28 888 C 18 986 46 1080 68 1184 C 88 1278 72 1372 34 1474 C 4 1562 -8 1666 20 1782 C 48 1898 72 2012 38 2136 C 10 2244 12 2348 50 2440"/>
+      <path class="root-shadow" stroke-width="6" filter="url(#root-depth)"
+        d="M 600 341 C 568 404 534 484 498 578 C 460 672 428 768 406 882 C 382 998 368 1114 384 1230 C 400 1338 418 1448 402 1572 C 386 1698 348 1818 354 1950 C 360 2082 394 2210 384 2358 C 374 2508 356 2660 368 2820"/>
+      <path class="root-shadow" stroke-width="6" filter="url(#root-depth)"
+        d="M 600 341 C 632 404 666 484 702 578 C 740 672 772 768 794 882 C 818 998 832 1114 816 1230 C 800 1338 782 1448 798 1572 C 814 1698 852 1818 846 1950 C 840 2082 806 2210 816 2358 C 826 2508 844 2660 832 2820"/>
+      <path class="root-shadow" stroke-width="8" filter="url(#root-depth)"
+        d="M 600 341 C 670 382 756 422 848 478 C 934 530 1004 592 1062 678 C 1116 762 1148 858 1148 968 C 1148 1072 1124 1178 1148 1306 C 1170 1428 1202 1558 1178 1716 C 1154 1876 1112 2018 1136 2196 C 1160 2374 1186 2566 1142 2774 C 1106 2966 1088 3168 1132 3390 C 1166 3566 1148 3740 1130 3960"/>
+      <path class="root-shadow" stroke-width="4" filter="url(#root-depth)"
+        d="M 600 341 C 592 530 606 730 602 940 C 598 1150 578 1364 590 1590 C 602 1816 608 2050 584 2286 C 560 2522 578 2758 594 2994 C 610 3230 596 3476 586 3714 C 578 3888 586 3972 590 4040"/>
+
+      <!-- ── ROOT BODY PASS (organic C-curves — IDs kept for animateMotion) ── -->
+      <!-- Root 1: jade — organic meandering left sweep -->
       <path id="root-1" class="tree-line-bright root-path-1"
-        d="M 600 340 Q 420 450 255 565 Q 135 645 75 790 Q 15 950 52 1130 Q 88 1310 42 1510 Q 8 1710 58 1920 Q 108 2110 52 2320"
-        stroke-width="1.4"/>
+        d="M 600 341 C 558 378 494 404 400 454 C 318 498 242 552 164 628 C 96 696 38 778 28 888 C 18 986 46 1080 68 1184 C 88 1278 72 1372 34 1474 C 4 1562 -8 1666 20 1782 C 48 1898 72 2012 38 2136 C 10 2244 12 2348 50 2440"
+        stroke-width="2.4"/>
 
-      <!-- Root 2: ocean — center-left → Videos section -->
+      <!-- Root 2: ocean — organic center-left meander -->
       <path id="root-2" class="tree-line-bright root-path-2"
-        d="M 600 340 Q 512 462 458 592 Q 412 714 392 886 Q 366 1088 393 1308 Q 420 1548 372 1808 Q 325 2090 378 2368 Q 428 2628 372 2888"
-        stroke-width="1.4"/>
+        d="M 600 341 C 568 404 534 484 498 578 C 460 672 428 768 406 882 C 382 998 368 1114 384 1230 C 400 1338 418 1448 402 1572 C 386 1698 348 1818 354 1950 C 360 2082 394 2210 384 2358 C 374 2508 356 2660 368 2820"
+        stroke-width="2.2"/>
 
-      <!-- Root 3: gold — center-right → Videos section -->
+      <!-- Root 3: gold — organic center-right meander (mirror of root-2) -->
       <path id="root-3" class="tree-line-bright root-path-3"
-        d="M 600 340 Q 688 462 742 592 Q 788 714 808 886 Q 834 1088 807 1308 Q 780 1548 828 1808 Q 875 2090 822 2368 Q 772 2628 828 2888"
-        stroke-width="1.4"/>
+        d="M 600 341 C 632 404 666 484 702 578 C 740 672 772 768 794 882 C 818 998 832 1114 816 1230 C 800 1338 782 1448 798 1572 C 814 1698 852 1818 846 1950 C 840 2082 806 2210 816 2358 C 826 2508 844 2660 832 2820"
+        stroke-width="2.2"/>
 
-      <!-- Root 4: ocean deep — far right → Contact form -->
+      <!-- Root 4: ocean deep — organic far-right arc -->
       <path id="root-4" class="tree-line-bright root-path-4"
-        d="M 600 340 Q 802 458 964 570 Q 1084 654 1128 798 Q 1178 974 1138 1180 Q 1098 1400 1160 1642 Q 1222 1908 1155 2192 Q 1088 2488 1155 2808 Q 1222 3132 1138 3418 Q 1072 3648 1138 3928"
+        d="M 600 341 C 670 382 756 422 848 478 C 934 530 1004 592 1062 678 C 1116 762 1148 858 1148 968 C 1148 1072 1124 1178 1148 1306 C 1170 1428 1202 1558 1178 1716 C 1154 1876 1112 2018 1136 2196 C 1160 2374 1186 2566 1142 2774 C 1106 2966 1088 3168 1132 3390 C 1166 3566 1148 3740 1130 3960"
+        stroke-width="2.8"/>
+
+      <!-- Root 5: center spine — sinuous descent -->
+      <path id="root-5" class="tree-line-bright root-path-5"
+        d="M 600 341 C 592 530 606 730 602 940 C 598 1150 578 1364 590 1590 C 602 1816 608 2050 584 2286 C 560 2522 578 2758 594 2994 C 610 3230 596 3476 586 3714 C 578 3888 586 3972 590 4040"
         stroke-width="1.6"/>
 
-      <!-- Root 5: center spine → Newsletter / Contact center -->
-      <path id="root-5" class="tree-line-bright root-path-5"
-        d="M 600 340 Q 590 710 600 1110 Q 612 1558 584 2048 Q 556 2558 596 3092 Q 630 3578 588 4020"
-        stroke-width="1.1"/>
+      <!-- ── ROOT HIGHLIGHT PASS (thin bright edge — cylindrical sheen) ── -->
+      <path class="root-hl" stroke="#00c896" stroke-width="0.7"
+        d="M 599 342 C 557 379 493 405 399 455 C 317 499 241 553 163 629 C 95 697 37 779 27 889 C 17 987 45 1081 67 1185 C 87 1279 71 1373 33 1475 C 3 1563 -9 1667 19 1783 C 47 1899 71 2013 37 2137 C 9 2245 11 2349 49 2441"/>
+      <path class="root-hl" stroke="#4db8d4" stroke-width="0.6"
+        d="M 599 342 C 567 405 533 485 497 579 C 459 673 427 769 405 883 C 381 999 367 1115 383 1231 C 399 1339 417 1449 401 1573 C 385 1699 347 1819 353 1951 C 359 2083 393 2211 383 2359 C 373 2509 355 2661 367 2821"/>
+      <path class="root-hl" stroke="#c8a040" stroke-width="0.6"
+        d="M 601 342 C 633 405 667 485 703 579 C 741 673 773 769 795 883 C 819 999 833 1115 817 1231 C 801 1339 783 1449 799 1573 C 815 1699 853 1819 847 1951 C 841 2083 807 2211 817 2359 C 827 2509 845 2661 833 2821"/>
+      <path class="root-hl" stroke="#4db8d4" stroke-width="0.8"
+        d="M 599 342 C 669 383 755 423 847 479 C 933 531 1003 593 1061 679 C 1115 763 1147 859 1147 969 C 1147 1073 1123 1179 1147 1307 C 1169 1429 1201 1559 1177 1717 C 1153 1877 1111 2019 1135 2197 C 1159 2375 1185 2567 1141 2775 C 1105 2967 1087 3169 1131 3391 C 1165 3567 1147 3741 1129 3961"/>
 
-      <!-- Organic sub-branches for root richness -->
-      <g class="tree-line" opacity="0.17">
-        <path d="M 255 565 Q 318 577 375 560" stroke-width="0.8"/>
-        <path d="M 75 790 Q 142 806 204 788" stroke-width="0.7"/>
-        <path d="M 52 1130 Q 122 1146 190 1128" stroke-width="0.6"/>
-        <path d="M 42 1510 Q 112 1525 178 1508" stroke-width="0.5"/>
-        <path d="M 58 1920 Q 128 1936 195 1918" stroke-width="0.5"/>
-        <path d="M 392 886 Q 336 902 272 886" stroke-width="0.7"/>
-        <path d="M 393 1308 Q 336 1325 271 1309" stroke-width="0.6"/>
-        <path d="M 372 1808 Q 314 1825 248 1808" stroke-width="0.5"/>
-        <path d="M 378 2368 Q 320 2384 255 2368" stroke-width="0.5"/>
-        <path d="M 808 886 Q 864 902 928 886" stroke-width="0.7"/>
-        <path d="M 807 1308 Q 864 1325 929 1309" stroke-width="0.6"/>
-        <path d="M 828 1808 Q 886 1825 952 1808" stroke-width="0.5"/>
-        <path d="M 822 2368 Q 880 2384 945 2368" stroke-width="0.5"/>
-        <path d="M 1128 798 Q 1072 818 1010 802" stroke-width="0.7"/>
-        <path d="M 1160 1642 Q 1100 1660 1038 1644" stroke-width="0.6"/>
-        <path d="M 1155 2192 Q 1094 2210 1032 2194" stroke-width="0.5"/>
-        <path d="M 1155 2808 Q 1094 2826 1032 2810" stroke-width="0.5"/>
-        <path d="M 1138 3418 Q 1078 3436 1016 3420" stroke-width="0.4"/>
-        <path d="M 600 1110 Q 652 1128 718 1112" stroke-width="0.6"/>
-        <path d="M 600 1110 Q 548 1128 482 1112" stroke-width="0.6"/>
-        <path d="M 584 2048 Q 636 2066 700 2050" stroke-width="0.5"/>
-        <path d="M 584 2048 Q 532 2066 468 2050" stroke-width="0.5"/>
-        <path d="M 596 3092 Q 646 3110 708 3094" stroke-width="0.4"/>
-        <path d="M 596 3092 Q 546 3110 484 3094" stroke-width="0.4"/>
+      <!-- ── ORGANIC LATERAL BRANCHES (anchored to new path endpoints) ── -->
+
+      <!-- Root 1 (jade) — laterals at segment endpoints -->
+      <g fill="none" stroke-linecap="round">
+        <!-- around (400, 454) -->
+        <path stroke="#00c896" stroke-width="1.2" opacity="0.38" d="M 400 454 Q 452 464 504 450"/>
+        <path stroke="#00c896" stroke-width="1.0" opacity="0.30" d="M 382 468 Q 428 480 470 466"/>
+        <path stroke="#00c896" stroke-width="1.0" opacity="0.30" d="M 400 454 Q 380 476 362 494"/>
+        <!-- around (164, 628) -->
+        <path stroke="#00c896" stroke-width="1.1" opacity="0.34" d="M 164 628 Q 218 640 272 626"/>
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.26" d="M 148 644 Q 198 658 246 644"/>
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.26" d="M 164 628 Q 142 652 122 672"/>
+        <!-- around (28, 888) -->
+        <path stroke="#00c896" stroke-width="1.1" opacity="0.34" d="M 28 888 Q 86 900 150 886"/>
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.26" d="M 14 904 Q 68 918 128 904"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.24" d="M 28 888 Q 8 912 -6 934"/>
+        <!-- around (68, 1184) -->
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.28" d="M 68 1184 Q 128 1198 190 1182"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.22" d="M 54 1200 Q 110 1214 170 1198"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.22" d="M 68 1184 Q 48 1208 32 1228"/>
+        <!-- around (34, 1474) -->
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.28" d="M 34 1474 Q 94 1488 154 1472"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.22" d="M 20 1490 Q 76 1504 134 1488"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.22" d="M 34 1474 Q 14 1498 2 1518"/>
+        <!-- around (20, 1782) -->
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.26" d="M 20 1782 Q 78 1796 136 1780"/>
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.20" d="M 6 1798 Q 60 1812 116 1796"/>
+        <!-- around (38, 2136) + (50, 2440) -->
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.22" d="M 38 2136 Q 88 2150 142 2134"/>
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.22" d="M 50 2440 Q 100 2454 152 2438"/>
+      </g>
+
+      <!-- Root 2 (ocean) — laterals at segment endpoints -->
+      <g fill="none" stroke-linecap="round">
+        <!-- around (498, 578) -->
+        <path stroke="#4db8d4" stroke-width="1.1" opacity="0.34" d="M 498 578 Q 448 592 390 578"/>
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.26" d="M 498 578 Q 480 600 464 618"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.24" d="M 510 592 Q 464 608 408 592"/>
+        <!-- around (406, 882) -->
+        <path stroke="#4db8d4" stroke-width="1.1" opacity="0.34" d="M 406 882 Q 352 896 294 880"/>
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.26" d="M 406 882 Q 388 906 370 922"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.24" d="M 420 898 Q 368 912 312 896"/>
+        <!-- around (384, 1230) -->
+        <path stroke="#4db8d4" stroke-width="1.0" opacity="0.30" d="M 384 1230 Q 330 1244 272 1228"/>
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.26" d="M 384 1230 Q 366 1254 350 1270"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.22" d="M 398 1246 Q 348 1260 292 1244"/>
+        <!-- around (402, 1572) -->
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.28" d="M 402 1572 Q 348 1586 290 1570"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.22" d="M 402 1572 Q 384 1596 368 1614"/>
+        <path stroke="#4db8d4" stroke-width="0.7" opacity="0.20" d="M 416 1586 Q 364 1600 308 1584"/>
+        <!-- around (354, 1950) + (384, 2358) + (368, 2820) -->
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.28" d="M 354 1950 Q 300 1964 244 1948"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.22" d="M 354 1950 Q 336 1974 318 1992"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.24" d="M 384 2358 Q 330 2372 274 2356"/>
+        <path stroke="#4db8d4" stroke-width="0.7" opacity="0.20" d="M 368 2820 Q 314 2834 258 2818"/>
+      </g>
+
+      <!-- Root 3 (gold) — laterals mirroring root-2 -->
+      <g fill="none" stroke-linecap="round">
+        <!-- around (702, 578) -->
+        <path stroke="#c8a040" stroke-width="1.1" opacity="0.34" d="M 702 578 Q 752 592 810 578"/>
+        <path stroke="#c8a040" stroke-width="0.9" opacity="0.26" d="M 702 578 Q 720 600 736 618"/>
+        <path stroke="#c8a040" stroke-width="0.8" opacity="0.24" d="M 690 592 Q 736 608 792 592"/>
+        <!-- around (794, 882) -->
+        <path stroke="#c8a040" stroke-width="1.1" opacity="0.34" d="M 794 882 Q 848 896 906 880"/>
+        <path stroke="#c8a040" stroke-width="0.9" opacity="0.26" d="M 794 882 Q 812 906 830 922"/>
+        <path stroke="#c8a040" stroke-width="0.8" opacity="0.24" d="M 780 898 Q 832 912 888 896"/>
+        <!-- around (816, 1230) -->
+        <path stroke="#c8a040" stroke-width="1.0" opacity="0.30" d="M 816 1230 Q 870 1244 928 1228"/>
+        <path stroke="#c8a040" stroke-width="0.9" opacity="0.26" d="M 816 1230 Q 834 1254 850 1270"/>
+        <path stroke="#c8a040" stroke-width="0.8" opacity="0.22" d="M 802 1246 Q 852 1260 908 1244"/>
+        <!-- around (798, 1572) -->
+        <path stroke="#c8a040" stroke-width="0.9" opacity="0.28" d="M 798 1572 Q 852 1586 910 1570"/>
+        <path stroke="#c8a040" stroke-width="0.8" opacity="0.22" d="M 798 1572 Q 816 1596 832 1614"/>
+        <path stroke="#c8a040" stroke-width="0.7" opacity="0.20" d="M 784 1586 Q 836 1600 892 1584"/>
+        <!-- around (846, 1950) + (816, 2358) + (832, 2820) -->
+        <path stroke="#c8a040" stroke-width="0.9" opacity="0.28" d="M 846 1950 Q 900 1964 956 1948"/>
+        <path stroke="#c8a040" stroke-width="0.8" opacity="0.22" d="M 846 1950 Q 864 1974 882 1992"/>
+        <path stroke="#c8a040" stroke-width="0.8" opacity="0.24" d="M 816 2358 Q 870 2372 926 2356"/>
+        <path stroke="#c8a040" stroke-width="0.7" opacity="0.20" d="M 832 2820 Q 886 2834 942 2818"/>
+      </g>
+
+      <!-- Root 4 (ocean deep) — laterals at segment endpoints -->
+      <g fill="none" stroke-linecap="round">
+        <!-- around (1062, 678) -->
+        <path stroke="#4db8d4" stroke-width="1.2" opacity="0.34" d="M 1062 678 Q 1012 694 956 678"/>
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.26" d="M 1076 694 Q 1028 708 974 692"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.24" d="M 1062 678 Q 1080 700 1100 720"/>
+        <!-- around (1148, 968) -->
+        <path stroke="#4db8d4" stroke-width="1.0" opacity="0.30" d="M 1148 968 Q 1096 982 1040 966"/>
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.26" d="M 1162 984 Q 1112 998 1058 982"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.22" d="M 1148 968 Q 1166 990 1186 1010"/>
+        <!-- around (1148, 1306) -->
+        <path stroke="#4db8d4" stroke-width="1.0" opacity="0.30" d="M 1148 1306 Q 1096 1320 1040 1304"/>
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.26" d="M 1162 1322 Q 1114 1336 1060 1320"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.22" d="M 1148 1306 Q 1168 1328 1186 1348"/>
+        <!-- around (1178, 1716) -->
+        <path stroke="#4db8d4" stroke-width="0.9" opacity="0.28" d="M 1178 1716 Q 1126 1730 1070 1714"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.22" d="M 1192 1732 Q 1142 1746 1086 1730"/>
+        <!-- around (1136, 2196) + (1142, 2774) + (1132, 3390) + (1130, 3960) -->
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.26" d="M 1136 2196 Q 1084 2210 1028 2194"/>
+        <path stroke="#4db8d4" stroke-width="0.7" opacity="0.20" d="M 1150 2212 Q 1100 2226 1046 2210"/>
+        <path stroke="#4db8d4" stroke-width="0.8" opacity="0.26" d="M 1142 2774 Q 1090 2788 1036 2772"/>
+        <path stroke="#4db8d4" stroke-width="0.7" opacity="0.20" d="M 1156 2790 Q 1106 2804 1052 2788"/>
+        <path stroke="#4db8d4" stroke-width="0.7" opacity="0.24" d="M 1132 3390 Q 1082 3404 1026 3388"/>
+        <path stroke="#4db8d4" stroke-width="0.6" opacity="0.18" d="M 1146 3406 Q 1098 3420 1044 3404"/>
+        <path stroke="#4db8d4" stroke-width="0.6" opacity="0.18" d="M 1130 3960 Q 1080 3974 1026 3958"/>
+      </g>
+
+      <!-- Root 5 (center spine) — bilateral laterals at segment endpoints -->
+      <g fill="none" stroke-linecap="round">
+        <!-- around (602, 940) -->
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.28" d="M 602 940 Q 650 954 712 938"/>
+        <path stroke="#00c896" stroke-width="0.9" opacity="0.28" d="M 602 940 Q 554 954 490 938"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.22" d="M 610 958 Q 656 972 716 956"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.22" d="M 594 958 Q 548 972 486 956"/>
+        <!-- around (590, 1590) -->
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.24" d="M 590 1590 Q 638 1604 698 1588"/>
+        <path stroke="#00c896" stroke-width="0.8" opacity="0.24" d="M 590 1590 Q 542 1604 480 1588"/>
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.18" d="M 598 1608 Q 644 1622 702 1606"/>
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.18" d="M 582 1608 Q 536 1622 474 1606"/>
+        <!-- around (584, 2286) -->
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.20" d="M 584 2286 Q 632 2300 692 2284"/>
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.20" d="M 584 2286 Q 536 2300 474 2284"/>
+        <path stroke="#00c896" stroke-width="0.6" opacity="0.16" d="M 592 2304 Q 638 2318 696 2302"/>
+        <path stroke="#00c896" stroke-width="0.6" opacity="0.16" d="M 576 2304 Q 530 2318 468 2302"/>
+        <!-- around (594, 2994) + (586, 3714) -->
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.20" d="M 594 2994 Q 642 3008 702 2992"/>
+        <path stroke="#00c896" stroke-width="0.7" opacity="0.20" d="M 594 2994 Q 546 3008 486 2992"/>
+        <path stroke="#00c896" stroke-width="0.6" opacity="0.16" d="M 602 3012 Q 648 3026 706 3010"/>
+        <path stroke="#00c896" stroke-width="0.6" opacity="0.16" d="M 586 3012 Q 540 3026 478 3010"/>
+        <path stroke="#00c896" stroke-width="0.6" opacity="0.16" d="M 586 3714 Q 634 3728 692 3712"/>
+        <path stroke="#00c896" stroke-width="0.6" opacity="0.16" d="M 586 3714 Q 538 3728 476 3712"/>
       </g>
 
       <!-- Section anchor node: About -->
@@ -208,9 +435,11 @@
         <animate attributeName="opacity" values="0;0.6;0.6;0" keyTimes="0;0.06;0.94;1" dur="15s" repeatCount="indefinite" begin="10.5s"/>
       </circle>
 
-      <!-- Trunk junction glow -->
-      <circle cx="600" cy="340" r="3" fill="#1a4a60" opacity="0.9"/>
-      <circle cx="600" cy="340" r="9" fill="none" stroke="#1a4a60" stroke-width="0.5" opacity="0.4"/>
+      <!-- Trunk-to-root junction node — layered glow -->
+      <ellipse cx="600" cy="341" rx="18" ry="8" fill="#030e18" opacity="0.7"/>
+      <circle cx="600" cy="340" r="5" fill="#1a4a60" opacity="0.9"/>
+      <circle cx="600" cy="340" r="10" fill="none" stroke="#1a4a60" stroke-width="0.8" opacity="0.45"/>
+      <circle cx="600" cy="340" r="18" fill="none" stroke="#0d2e44" stroke-width="0.4" opacity="0.35"/>
 
       <!-- Logo at apex -->
       <circle cx="600" cy="25" r="51" fill="rgba(4,6,14,0.75)" stroke="rgba(0,200,150,0.45)" stroke-width="1.5"/>
@@ -232,7 +461,6 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <img src="images/logo.png" alt="Lifewater" class="hero-logo" />
       <p class="hero-eyebrow">Artist · Business Operations Consultant · Natural Athlete</p>
       <h1 class="hero-title">
         <span class="name-dede">DeDe</span>

@@ -228,12 +228,17 @@ nav.nav-visible {
 
 .tree-line       { stroke: #112a3a; fill: none; stroke-linecap: round; stroke-width: 1; }
 .tree-line-bright{ stroke: #1a4a60; fill: none; stroke-linecap: round; stroke-width: 1.2; }
-.tree-trunk      { stroke: #0e5570; fill: none; stroke-linecap: round; stroke-width: 1.8; }
 
-.root-path-1 { stroke: #00c896; opacity: 0.4; }
-.root-path-2 { stroke: #4db8d4; opacity: 0.35; }
-.root-path-3 { stroke: #c8a040; opacity: 0.35; }
-.root-path-4 { stroke: #4db8d4; opacity: 0.5; }
+/* root shadow base — dark blurred duplicate for 3D depth */
+.root-shadow { fill: none; stroke: #000; stroke-linecap: round; opacity: 0.32; }
+/* root highlight — thin bright edge for cylindrical sheen */
+.root-hl     { fill: none; stroke-linecap: round; opacity: 0.28; }
+
+.root-path-1 { stroke: #00c896; opacity: 0.55; }
+.root-path-2 { stroke: #4db8d4; opacity: 0.50; }
+.root-path-3 { stroke: #c8a040; opacity: 0.50; }
+.root-path-4 { stroke: #4db8d4; opacity: 0.62; }
+.root-path-5 { stroke: #00c896; opacity: 0.28; }
 
 .leaf { fill: #1a4a60; opacity: 0.7; }
 .canopy-glow { fill: rgba(26,127,168,0.12); filter: blur(8px); }
