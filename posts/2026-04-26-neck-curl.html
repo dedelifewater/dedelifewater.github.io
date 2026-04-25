@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neck Curl — The Insurance Policy | DeDe Lifewater</title>
+<meta name="description" content="Seven years of training reviewed, exercise by exercise. Article 01: Neck Curl with plate — building structural integrity from the top down.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* LIFEWATER palette — pulled from logo */
+  --root-deep: #0F2A1D;        /* deep root green — primary text */
+  --forest: #1F4D2B;            /* logo wave color */
+  --sprout: #5FBE3E;            /* sprout green — accents */
+  --sprout-soft: #8FD56E;       /* lighter sprout */
+  --sky: #A8D8F0;               /* sky water */
+  --sky-soft: #D5EAF5;          /* softer sky */
+  --mist: #E8F4F8;              /* off-white bg */
+  --paper: #FBFEFF;             /* card surface */
+  --line: rgba(31, 77, 43, 0.12);
+  --shadow: 0 1px 2px rgba(15, 42, 29, 0.04), 0 8px 24px rgba(15, 42, 29, 0.06);
+
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--root-deep);
+  background: var(--mist);
+  background-image:
+    radial-gradient(ellipse at top, var(--sky-soft) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(168, 216, 240, 0.3) 0%, transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Top Nav ─────────────────────────────────── */
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--root-deep);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nav-links a {
+  color: var(--forest);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--sprout); }
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: var(--sprout);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* ── Article Container ───────────────────────── */
+article {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 32px 120px;
+}
+
+/* ── Header / Hero ───────────────────────────── */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 24px;
+}
+
+.meta-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--sprout);
+}
+
+.series-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(95, 190, 62, 0.12);
+  border: 1px solid rgba(95, 190, 62, 0.3);
+  border-radius: 100px;
+  color: var(--forest);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--root-deep);
+  margin-bottom: 20px;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--forest);
+  font-weight: 400;
+}
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.4;
+  margin-bottom: 36px;
+  max-width: 600px;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tag {
+  padding: 5px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--forest);
+  font-weight: 500;
+}
+
+/* ── Wave Divider ────────────────────────────── */
+.wave-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 56px 0 48px;
+  gap: 14px;
+}
+
+.wave-divider svg {
+  flex-shrink: 0;
+}
+
+.wave-divider .line {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(to right, transparent, var(--line), transparent);
+}
+
+/* ── Section Headers ─────────────────────────── */
+.section {
+  margin-bottom: 56px;
+  scroll-margin-top: 40px;
+}
+
+.section-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--root-deep);
+  margin-bottom: 24px;
+  position: relative;
+  padding-left: 0;
+}
+
+h2::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  background: var(--sprout);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(95, 190, 62, 0.2);
+}
+
+@media (max-width: 600px) {
+  h2::before { display: none; }
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 17px;
+  color: rgba(15, 42, 29, 0.88);
+}
+
+p strong {
+  color: var(--root-deep);
+  font-weight: 600;
+}
+
+p em {
+  color: var(--forest);
+}
+
+/* ── Pull Quote ──────────────────────────────── */
+.pullquote {
+  margin: 48px 0;
+  padding: 32px 36px;
+  background: linear-gradient(135deg, rgba(168, 216, 240, 0.25), rgba(168, 216, 240, 0.1));
+  border-left: 3px solid var(--sprout);
+  border-radius: 0 8px 8px 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--root-deep);
+  position: relative;
+}
+
+.pullquote::before {
+  content: '"';
+  position: absolute;
+  top: 8px;
+  left: 18px;
+  font-size: 60px;
+  color: var(--sprout);
+  opacity: 0.3;
+  font-family: var(--serif);
+  line-height: 1;
+}
+
+/* ── Stat / Spec Grid ────────────────────────── */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.spec-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.spec-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 42, 29, 0.08), 0 12px 28px rgba(15, 42, 29, 0.08);
+}
+
+.spec-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.spec-value {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--root-deep);
+  line-height: 1.3;
+}
+
+/* ── Pro Tip / Callout ───────────────────────── */
+.callout {
+  margin: 32px 0;
+  padding: 24px 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--sprout), var(--forest));
+}
+
+.callout-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.callout-label .icon {
+  display: inline-block;
+  width: 14px; height: 14px;
+}
+
+.callout-trap::before {
+  background: linear-gradient(to bottom, #C97B3F, #8B4A1F);
+}
+.callout-trap .callout-label { color: #C97B3F; }
+
+/* ── Verdict Section ─────────────────────────── */
+.verdict {
+  margin: 64px 0 32px;
+  padding: 48px 40px;
+  background: linear-gradient(135deg, var(--paper) 0%, var(--mist) 100%);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.verdict::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(95, 190, 62, 0.15), transparent 70%);
+  border-radius: 50%;
+}
+
+.verdict-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.verdict-rating {
+  font-size: 36px;
+  margin-bottom: 16px;
+  letter-spacing: 4px;
+}
+
+.verdict-rating .star {
+  color: var(--sprout);
+  filter: drop-shadow(0 2px 4px rgba(95, 190, 62, 0.3));
+}
+
+.verdict-score {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--forest);
+  margin-bottom: 24px;
+}
+
+.verdict-final {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--root-deep);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Footer / Up Next ────────────────────────── */
+.up-next {
+  margin-top: 80px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.up-next-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.up-next-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--root-deep);
+  margin-bottom: 8px;
+}
+
+.up-next-desc {
+  font-size: 15px;
+  color: var(--forest);
+}
+
+footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 32px 60px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--forest);
+  opacity: 0.6;
+}
+
+/* ── First letter drop cap ───────────────────── */
+.intro p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 600;
+  color: var(--forest);
+  float: left;
+  line-height: 0.85;
+  margin: 6px 10px 0 0;
+  padding-top: 4px;
+}
+
+/* ── Animations ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+article > * {
+  animation: fadeUp 0.6s ease-out backwards;
+}
+
+article > *:nth-child(1) { animation-delay: 0.05s; }
+article > *:nth-child(2) { animation-delay: 0.12s; }
+article > *:nth-child(3) { animation-delay: 0.19s; }
+article > *:nth-child(4) { animation-delay: 0.26s; }
+article > *:nth-child(5) { animation-delay: 0.33s; }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 640px) {
+  .nav { padding: 20px 20px; }
+  .nav-links { display: none; }
+  article { padding: 24px 22px 80px; }
+  h1 { font-size: 38px; }
+  h2 { font-size: 30px; }
+  .subtitle { font-size: 19px; }
+  .pullquote { font-size: 19px; padding: 24px 24px 24px 28px; }
+  .verdict { padding: 36px 24px; }
+  .verdict-final { font-size: 20px; }
+  body { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────── -->
+<nav class="nav">
+  <a href="/index.html" class="brand">
+    <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 65 Q 30 45, 50 60 T 90 55" stroke="#1F4D2B" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M10 78 Q 30 60, 50 73 T 90 68" stroke="#5FBE3E" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <ellipse cx="68" cy="32" rx="6" ry="10" fill="#5FBE3E" transform="rotate(-25 68 32)"/>
+      <ellipse cx="78" cy="30" rx="6" ry="10" fill="#8FD56E" transform="rotate(25 78 30)"/>
+      <line x1="73" y1="38" x2="73" y2="50" stroke="#1F4D2B" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    DeDe Lifewater
+  </a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <a href="/archive.html">Archive</a>
+    <a href="/music.html">Music</a>
+    <a href="/index.html#about">About</a>
+  </div>
+</nav>
+
+<!-- ── Article ────────────────────────────────── -->
+<article>
+
+  <!-- Meta + tags -->
+  <div class="article-meta">
+    <span class="series-tag"><span class="meta-dot"></span> Body Archive · 01</span>
+    <span>Neck &amp; Traps</span>
+    <span class="meta-dot"></span>
+    <span>8 min read</span>
+  </div>
+
+  <!-- Title -->
+  <h1>The <em>Insurance Policy</em><br>Nobody Notices</h1>
+
+  <p class="subtitle">
+    Seven years in, the rep that quietly built my structural integrity from the top down. This is the neck curl review — and the start of a head-to-toe archive.
+  </p>
+
+  <div class="tags">
+    <span class="tag">Neck Curl</span>
+    <span class="tag">Plate Loaded</span>
+    <span class="tag">Pull Pattern</span>
+    <span class="tag">Bronze Era</span>
+    <span class="tag">Posture</span>
+  </div>
+
+  <!-- Intro / Drop cap -->
+  <div class="intro">
+    <p>
+      I started my journey at <strong>Goodlife Healthclubs Chermside</strong>, jumping into the deep end with group fitness before eventually claiming the gym floor as my own. In 2019 I won the 8-Week Challenge, transforming from <strong>47kg to 61kg</strong>. The year after, I completed my Certificate III &amp; IV in Fitness at the Australian Institute of Fitness — surrounded by young-blood athletes and seasoned oldies. I felt I was the least experienced of the bunch. At least I could pistol squat.
+    </p>
+    <p>
+      It felt lame because I didn't know how to socialise <em>(still don't)</em>. I'd run through the same generic questions — "<em>how many pull-ups can you do?</em>" — instead of going deep into someone's <em>why</em> and <em>how</em>. That shallow approach is part of why I twice failed at building a PT business across Fitness First, Goodlife, and most recently Fitness Cartel.
+    </p>
+    <p>
+      Seven years later, I've traded noobie bullshit for calculated movements and deep mind-muscle connection. <strong>This is my archive</strong> — a head-to-toe index of every rep, set, and lesson learned along the way.
+    </p>
+  </div>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider">
+    <span class="line"></span>
+    <svg width="60" height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 14 Q 12 4, 22 12 T 42 12 T 58 12" stroke="#1F4D2B" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="50" cy="6" r="2.5" fill="#5FBE3E"/>
+      <circle cx="55" cy="8" r="2" fill="#5FBE3E"/>
+      <circle cx="49" cy="11" r="1.8" fill="#5FBE3E" opacity="0.7"/>
+    </svg>
+    <span class="line"></span>
+  </div>
+
+  <!-- ROOTS -->
+  <section class="section" id="roots">
+    <span class="section-num">SECTION 01 · ROOTS</span>
+    <h2>Where it started</h2>
+
+    <p>
+      I started neck curls roughly four years ago, just as I was transitioning from a Hungry Jack's crew member to an aspiring PT. My education came from the <strong>Natural Titans</strong> of YouTube — <em>Alex Leonidas</em> and <em>Geoffrey Verity Schofield</em>.
+    </p>
+    <p>
+      They opened my eyes to the <strong>Bronze Era</strong> lifters of the 1800s and early 1900s. Those legends didn't have fancy machines. They focused on overhead strength and superhuman feats. A standout trait of that era was <strong>massive neck and trap development</strong> — a byproduct of lifting heavy weight by any means necessary.
+    </p>
+    <p>
+      They lacked the chest development we see today (the bench press wasn't yet king), but their <em>yoke</em> was undeniable. I wanted that same rugged, functional density.
+    </p>
+
+    <div class="pullquote">
+      I wanted the kind of strength people don't notice until they really look at you.
+    </div>
+  </section>
+
+  <!-- MECHANICS -->
+  <section class="section" id="mechanics">
+    <span class="section-num">SECTION 02 · MECHANICS</span>
+    <h2>The movement</h2>
+
+    <p>
+      Lie back on a flat or slight incline bench with your head hanging off the edge. Place a weight plate on your forehead — <strong>use a towel for comfort</strong>. Slowly lower your head to full extension, then curl your chin toward your chest.
+    </p>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-label">Pattern</div>
+        <div class="spec-value">Pull · Cervical Flexion</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Primary Target</div>
+        <div class="spec-value">Sternocleidomastoid</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Secondary</div>
+        <div class="spec-value">Upper Traps</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Equipment</div>
+        <div class="spec-value">Plate + Towel</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Starting Load</div>
+        <div class="spec-value">2.5 kg</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Outcome</div>
+        <div class="spec-value">Density &amp; Yoke</div>
+      </div>
+    </div>
+
+    <p>
+      The result is thickness and density at the base of the head — the <em>"mountainous"</em> look where the head meets the shoulders. Essential for a powerful silhouette.
+    </p>
+  </section>
+
+  <!-- DEPTH -->
+  <section class="section" id="depth">
+    <span class="section-num">SECTION 03 · DEPTH</span>
+    <h2>Seven-year wisdom</h2>
+
+    <p>
+      Interestingly, my neck hasn't ballooned in size. I've pivoted to treating this as a <strong>mobility and posture tool</strong>. Training the neck has eliminated the desk-job ache. It's given me the structural integrity to perform wrestler-style neck bridges and the <em>subconscious confidence</em> that my cervical spine is protected.
+    </p>
+    <p>
+      Whether it's daily life or a random impact, I know my "block" isn't falling off — it's going to rebound with perfect alignment. In the rare circumstance I had to deal with environmental impact or the anime-tier confrontations of the YNs, I'd adapt quickly. This underrated neck I've built is ready for the world I walk through daily.
+    </p>
+
+    <div class="callout callout-trap">
+      <div class="callout-label">⚠ The Noobie Trap</div>
+      <p style="margin: 0;">
+        Jumping the gun. If you grab a 20kg plate because it looks alpha, your neck will quickly inform you of your mistake. <strong>This isn't the place for ego.</strong>
+      </p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">▴ The Pro Tip</div>
+      <p style="margin: 0;">
+        Start with <strong>2.5kg</strong>. Seriously. Perfect movement outweighs boomer reps. Master the control, then slowly add mass to these hidden areas. Build a body that is <em>strong from the inside out</em>.
+      </p>
+    </div>
+  </section>
+
+  <!-- VERDICT -->
+  <section class="section" id="verdict">
+    <div class="verdict">
+      <div class="verdict-label">— The Verdict —</div>
+      <div class="verdict-rating">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div class="verdict-score">5.0 / 5</div>
+      <div class="verdict-final">
+        An underrated insurance policy for your body. It builds the kind of strength people don't notice <em>until they really look at you.</em>
+      </div>
+    </div>
+  </section>
+
+  <!-- Up Next -->
+  <div class="up-next">
+    <div class="up-next-label">↳ Next in the archive</div>
+    <div class="up-next-title">02 · Trap Shrug</div>
+    <div class="up-next-desc">From neck to shoulders — building the yoke that holds the structure up.</div>
+  </div>
+
+</article>
+
+<footer>
+  © DeDe Lifewater · Build Yourself. For Real. · Brisbane, AU
+</footer>
+
+</body>
+</html>

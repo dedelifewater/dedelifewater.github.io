@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Body Archive | DeDe Lifewater</title>
+<meta name="description" content="A head-to-toe index of every rep, set, and lesson learned across seven years of training. Reviewed honestly. Built to last.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --root-deep: #0F2A1D;
+  --forest: #1F4D2B;
+  --sprout: #5FBE3E;
+  --sprout-soft: #8FD56E;
+  --sky: #A8D8F0;
+  --sky-soft: #D5EAF5;
+  --mist: #E8F4F8;
+  --paper: #FBFEFF;
+  --line: rgba(31, 77, 43, 0.12);
+  --shadow: 0 1px 2px rgba(15, 42, 29, 0.04), 0 8px 24px rgba(15, 42, 29, 0.06);
+
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--root-deep);
+  background: var(--mist);
+  background-image:
+    radial-gradient(ellipse at top, var(--sky-soft) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(168, 216, 240, 0.3) 0%, transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Top Nav ─────────────────────────────────── */
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--root-deep);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark { width: 32px; height: 32px; }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.nav-links a {
+  color: var(--forest);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--sprout); }
+.nav-links a.active { color: var(--sprout); }
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 1px;
+  background: var(--sprout);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* ── Hero / Header ───────────────────────────── */
+.hero {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 60px 32px 40px;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background: rgba(95, 190, 62, 0.1);
+  border: 1px solid rgba(95, 190, 62, 0.25);
+  border-radius: 100px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sprout);
+  box-shadow: 0 0 0 3px rgba(95, 190, 62, 0.2);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(48px, 8vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--root-deep);
+  margin-bottom: 24px;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--forest);
+  font-weight: 400;
+}
+
+.hero-sub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.4;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--root-deep);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-top: 6px;
+}
+
+/* ── Wave Divider ────────────────────────────── */
+.wave-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 56px auto 32px;
+  gap: 14px;
+  max-width: 600px;
+}
+
+.wave-divider .line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, var(--line), transparent);
+}
+
+/* ── Filter Bar ──────────────────────────────── */
+.filter-bar {
+  max-width: 980px;
+  margin: 0 auto 48px;
+  padding: 0 32px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 8px 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--forest);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--sprout);
+  color: var(--sprout);
+}
+
+.filter-btn.active {
+  background: var(--forest);
+  border-color: var(--forest);
+  color: var(--paper);
+}
+
+.filter-count {
+  margin-left: 6px;
+  opacity: 0.6;
+  font-size: 10px;
+}
+
+/* ── Article Grid ────────────────────────────── */
+.archive-grid {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 32px 100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.article-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px 26px;
+  text-decoration: none;
+  color: var(--root-deep);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(15, 42, 29, 0.08), 0 18px 40px rgba(15, 42, 29, 0.1);
+  border-color: rgba(95, 190, 62, 0.4);
+}
+
+.article-card.coming-soon {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+.article-card.coming-soon::after {
+  content: 'Coming soon';
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--forest);
+  background: var(--mist);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.card-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--sprout);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--root-deep);
+}
+
+.card-region {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 16px;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: rgba(15, 42, 29, 0.7);
+  line-height: 1.55;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--forest);
+}
+
+.card-rating {
+  color: var(--sprout);
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.card-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.article-card:hover .card-arrow { transform: translateX(4px); }
+
+/* Hidden state for filtered cards */
+.article-card[data-hidden="true"] { display: none; }
+
+/* ── Footer ──────────────────────────────────── */
+footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 32px 60px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--forest);
+  opacity: 0.6;
+}
+
+/* ── Animations ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero > * { animation: fadeUp 0.6s ease-out backwards; }
+.hero > *:nth-child(1) { animation-delay: 0.05s; }
+.hero > *:nth-child(2) { animation-delay: 0.12s; }
+.hero > *:nth-child(3) { animation-delay: 0.19s; }
+.hero > *:nth-child(4) { animation-delay: 0.26s; }
+
+.article-card {
+  animation: fadeUp 0.5s ease-out backwards;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 640px) {
+  .nav { padding: 20px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 36px 20px 24px; }
+  .hero-stats { gap: 24px; }
+  .filter-bar { padding: 0 20px; gap: 6px; }
+  .filter-btn { padding: 6px 12px; font-size: 11px; }
+  .archive-grid { padding: 0 20px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────── -->
+<nav class="nav">
+  <a href="/index.html" class="brand">
+    <svg class="brand-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 65 Q 30 45, 50 60 T 90 55" stroke="#1F4D2B" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M10 78 Q 30 60, 50 73 T 90 68" stroke="#5FBE3E" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <ellipse cx="68" cy="32" rx="6" ry="10" fill="#5FBE3E" transform="rotate(-25 68 32)"/>
+      <ellipse cx="78" cy="30" rx="6" ry="10" fill="#8FD56E" transform="rotate(25 78 30)"/>
+      <line x1="73" y1="38" x2="73" y2="50" stroke="#1F4D2B" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    DeDe Lifewater
+  </a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <a href="/archive.html" class="active">Archive</a>
+    <a href="/music.html">Music</a>
+    <a href="/index.html#about">About</a>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────── -->
+<section class="hero">
+  <span class="hero-eyebrow">The Body Archive</span>
+  <h1>Head to <em>toe.</em><br>Rep by rep.</h1>
+  <p class="hero-sub">
+    Seven years of training, reviewed honestly. Every exercise I've used to build, repair, and understand this body — indexed and archived for the long run.
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">7+</div>
+      <div class="stat-label">Years Trained</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Articles Live</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">In Progress</div>
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider">
+  <span class="line"></span>
+  <svg width="60" height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 14 Q 12 4, 22 12 T 42 12 T 58 12" stroke="#1F4D2B" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="50" cy="6" r="2.5" fill="#5FBE3E"/>
+    <circle cx="55" cy="8" r="2" fill="#5FBE3E"/>
+    <circle cx="49" cy="11" r="1.8" fill="#5FBE3E" opacity="0.7"/>
+  </svg>
+  <span class="line"></span>
+</div>
+
+<!-- ── Filters ────────────────────────────────── -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-region="all">All</button>
+  <button class="filter-btn" data-region="neck">Neck</button>
+  <button class="filter-btn" data-region="shoulders">Shoulders</button>
+  <button class="filter-btn" data-region="chest">Chest</button>
+  <button class="filter-btn" data-region="back">Back</button>
+  <button class="filter-btn" data-region="arms">Arms</button>
+  <button class="filter-btn" data-region="core">Core</button>
+  <button class="filter-btn" data-region="legs">Legs</button>
+</div>
+
+<!-- ── Article Grid ───────────────────────────── -->
+<div class="archive-grid">
+
+  <!-- Article 01 — LIVE -->
+  <a href="posts/2026-04-26-neck-curl.html" class="article-card" data-region="neck" style="animation-delay: 0.05s;">
+    <div class="card-num">01 · Body Archive</div>
+    <h3 class="card-title">The Insurance Policy Nobody Notices</h3>
+    <div class="card-region">Neck &amp; Traps · Pull</div>
+    <p class="card-desc">
+      Plate-loaded neck curls, reviewed seven years deep. Why I traded the Bronze-Era yoke ambition for structural integrity and posture work.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">★★★★★</span>
+      <span>Read <span class="card-arrow">→</span></span>
+    </div>
+  </a>
+
+  <!-- Article 02 — placeholder -->
+  <div class="article-card coming-soon" data-region="neck" style="animation-delay: 0.1s;">
+    <div class="card-num">02 · Body Archive</div>
+    <h3 class="card-title">Trap Shrug</h3>
+    <div class="card-region">Neck &amp; Traps · Pull</div>
+    <p class="card-desc">
+      From neck to shoulders — building the yoke that holds the structure up.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+  <!-- Article 03 — placeholder -->
+  <div class="article-card coming-soon" data-region="shoulders" style="animation-delay: 0.15s;">
+    <div class="card-num">03 · Body Archive</div>
+    <h3 class="card-title">Overhead Press</h3>
+    <div class="card-region">Shoulders · Push</div>
+    <p class="card-desc">
+      The Bronze-Era king. Why the press built the yokes I admired before benches existed.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+  <!-- Article 04 — placeholder -->
+  <div class="article-card coming-soon" data-region="shoulders" style="animation-delay: 0.2s;">
+    <div class="card-num">04 · Body Archive</div>
+    <h3 class="card-title">Lateral Raise</h3>
+    <div class="card-region">Shoulders · Pull</div>
+    <p class="card-desc">
+      The slow lesson — ego loses, tension wins. The exercise that taught me mind-muscle.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+  <!-- Article 05 — placeholder -->
+  <div class="article-card coming-soon" data-region="chest" style="animation-delay: 0.25s;">
+    <div class="card-num">05 · Body Archive</div>
+    <h3 class="card-title">Bench Press</h3>
+    <div class="card-region">Chest · Push</div>
+    <p class="card-desc">
+      The modern king. What seven years revealed about the bench beyond the numbers.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+  <!-- Article 06 — placeholder -->
+  <div class="article-card coming-soon" data-region="back" style="animation-delay: 0.3s;">
+    <div class="card-num">06 · Body Archive</div>
+    <h3 class="card-title">Pull-Up</h3>
+    <div class="card-region">Back · Pull</div>
+    <p class="card-desc">
+      The PT-school small-talk question. What it actually measures — and what it doesn't.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+  <!-- Article 07 — placeholder -->
+  <div class="article-card coming-soon" data-region="legs" style="animation-delay: 0.35s;">
+    <div class="card-num">07 · Body Archive</div>
+    <h3 class="card-title">Pistol Squat</h3>
+    <div class="card-region">Legs · Push</div>
+    <p class="card-desc">
+      The one thing I could do at AIF when I felt least experienced. Single-leg patience.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+  <!-- Article 08 — placeholder -->
+  <div class="article-card coming-soon" data-region="core" style="animation-delay: 0.4s;">
+    <div class="card-num">08 · Body Archive</div>
+    <h3 class="card-title">Hanging Leg Raise</h3>
+    <div class="card-region">Core · Pull</div>
+    <p class="card-desc">
+      The honest core work. Why hanging exposes everything you've been hiding.
+    </p>
+    <div class="card-meta">
+      <span class="card-rating">— — — — —</span>
+      <span>Drafting</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © DeDe Lifewater · Build Yourself. For Real. · Brisbane, AU
+</footer>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.article-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const region = btn.dataset.region;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      cards.forEach(card => {
+        card.dataset.hidden = (region === 'all' || card.dataset.region === region) ? 'false' : 'true';
+      });
+    });
+  });
+
+  filterBtns.forEach(btn => {
+    const region = btn.dataset.region;
+    if (region === 'all') return;
+    const count = document.querySelectorAll(`.article-card[data-region="${region}"]`).length;
+    if (count > 0) {
+      const span = document.createElement('span');
+      span.className = 'filter-count';
+      span.textContent = count;
+      btn.appendChild(span);
+    }
+  });
+</script>
+
+</body>
+</html>
