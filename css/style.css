@@ -246,6 +246,7 @@ nav.nav-visible {
 .tree-canopy {
   transform-origin: 600px 320px;
   animation: treeSway 9s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes treeSway {
@@ -766,9 +767,10 @@ footer {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
 }
 
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.visible { opacity: 1; transform: translateY(0); will-change: auto; }
 
 /* ── BUY ME A COFFEE ── */
 .btn-coffee {
@@ -934,6 +936,8 @@ footer {
   /* Tree: reduce root opacity on mobile for performance */
   #page-tree { opacity: 0.6; }
   .section-node, .section-node-outer { display: none; }
+  /* Stop SVG SMIL drop animations on mobile */
+  .drop-1, .drop-2, .drop-3, .drop-4, .pulse-drop { display: none; }
 
   /* Footer */
   footer { padding: 3rem 1.25rem 2rem; }

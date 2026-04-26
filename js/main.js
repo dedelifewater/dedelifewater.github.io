@@ -3,7 +3,11 @@
   const canvas = document.getElementById('star-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let stars = [], time = 0;
+  let stars = [], time = 0, lastFrame = 0;
+  let bgCanvas, bgCtx;
+  let isMobile = false;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const CONSTELLATIONS = [
     {
@@ -43,15 +47,38 @@
     }
   ];
 
+  // Pre-render the static nebula background once per resize
+  function buildBg() {
+    bgCanvas = document.createElement('canvas');
+    bgCanvas.width = canvas.width;
+    bgCanvas.height = canvas.height;
+    bgCtx = bgCanvas.getContext('2d');
+    bgCtx.fillStyle = '#04060e';
+    bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+    const neb = bgCtx.createRadialGradient(
+      bgCanvas.width * 0.5, bgCanvas.height * 0.3, 0,
+      bgCanvas.width * 0.5, bgCanvas.height * 0.3, bgCanvas.width * 0.6
+    );
+    neb.addColorStop(0, 'rgba(10,20,40,0.6)');
+    neb.addColorStop(0.4, 'rgba(6,14,28,0.3)');
+    neb.addColorStop(1, 'transparent');
+    bgCtx.fillStyle = neb;
+    bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+  }
+
   function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    isMobile = canvas.width < 768;
+    buildBg();
     buildStars();
   }
 
   function buildStars() {
     stars = [];
-    const count = Math.min(600, Math.floor(canvas.width * canvas.height / 3000));
+    const maxCount = isMobile ? 180 : 600;
+    const density = isMobile ? 7000 : 3000;
+    const count = Math.min(maxCount, Math.floor(canvas.width * canvas.height / density));
     for (let i = 0; i < count; i++) {
       const roll = Math.random();
       stars.push({
@@ -78,6 +105,7 @@
     });
   }
 
+  // Simplified: removed per-frame createRadialGradient (major perf win)
   function drawConstellations() {
     const w = canvas.width, h = canvas.height;
     const pulse = Math.sin(time * 0.25) * 0.1 + 0.9;
@@ -85,7 +113,6 @@
     CONSTELLATIONS.forEach(c => {
       const pts = c.pts.map(([x, y]) => [x * w, y * h]);
 
-      // Lines
       ctx.save();
       ctx.strokeStyle = `rgba(77,184,212,${0.18 * pulse})`;
       ctx.lineWidth = 0.6;
@@ -99,53 +126,52 @@
       ctx.setLineDash([]);
       ctx.restore();
 
-      // Stars
       pts.forEach(([x, y], i) => {
         const twinkle = Math.sin(time * 1.2 + i * 1.7) * 0.2 + 0.8;
-        // Glow
-        const grd = ctx.createRadialGradient(x, y, 0, x, y, 7);
-        grd.addColorStop(0, `rgba(160,220,255,${0.25 * twinkle * pulse})`);
-        grd.addColorStop(1, 'transparent');
-        ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2);
-        ctx.fillStyle = grd; ctx.fill();
-        // Core
-        ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2);
+        // Soft glow — simple filled circle instead of createRadialGradient
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(160,220,255,${0.1 * twinkle * pulse})`;
+        ctx.fill();
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(210,240,255,${0.85 * twinkle * pulse})`;
         ctx.fill();
       });
 
-      // Label near centroid
+      // Labels only on desktop
       const cx = pts.reduce((s, p) => s + p[0], 0) / pts.length;
       const cy = Math.min(...pts.map(p => p[1])) - 14;
       ctx.fillStyle = `rgba(77,184,212,${0.22 * pulse})`;
       ctx.font = '7px monospace';
       ctx.textAlign = 'center';
-      ctx.letterSpacing = '0.15em';
       ctx.fillText(c.name, cx, cy);
     });
   }
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Deep space background
-    ctx.fillStyle = '#04060e';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // Subtle nebula glow
-    const neb = ctx.createRadialGradient(canvas.width*0.5, canvas.height*0.3, 0, canvas.width*0.5, canvas.height*0.3, canvas.width*0.6);
-    neb.addColorStop(0, 'rgba(10,20,40,0.6)');
-    neb.addColorStop(0.4, 'rgba(6,14,28,0.3)');
-    neb.addColorStop(1, 'transparent');
-    ctx.fillStyle = neb; ctx.fillRect(0, 0, canvas.width, canvas.height);
+  function animate(ts) {
+    requestAnimationFrame(animate);
+    // Cap at ~30fps to reduce GPU/CPU load
+    if (ts - lastFrame < 32) return;
+    lastFrame = ts;
 
+    ctx.drawImage(bgCanvas, 0, 0); // blit pre-rendered background
     time += 0.016;
     drawStars();
-    drawConstellations();
-    requestAnimationFrame(animate);
+    if (!isMobile) drawConstellations();
   }
 
   resize();
-  animate();
   window.addEventListener('resize', resize);
+
+  if (reducedMotion) {
+    // Static frame only — respect user system preference
+    ctx.drawImage(bgCanvas, 0, 0);
+    drawStars();
+  } else {
+    requestAnimationFrame(animate);
+  }
 })();
 
 // ── MOON PHASE ──
@@ -190,6 +216,7 @@ if (canvas) {
   let droplets = [];
   let particles = [];
   let time = 0;
+  let lastHeroFrame = 0;
 
   const resize = () => {
     canvas.width = window.innerWidth;
@@ -197,7 +224,6 @@ if (canvas) {
     buildTree();
   };
 
-  // Build the tree branch data
   function buildTree() {
     branches = [];
     const cx = canvas.width / 2;
@@ -230,7 +256,6 @@ if (canvas) {
     growRoot(ex, ey, angle + spread, len * 0.65, width * 0.65, depth - 1);
   }
 
-  // Spawn a droplet on a random branch endpoint
   function spawnDroplet() {
     const tips = branches.filter(b => b.depth <= 3 && !b.isRoot);
     if (!tips.length) return;
@@ -246,7 +271,6 @@ if (canvas) {
     });
   }
 
-  // Ambient rising particles
   function spawnParticle() {
     particles.push({
       x: Math.random() * canvas.width,
@@ -263,11 +287,14 @@ if (canvas) {
   let dropletTimer = 0;
   let particleTimer = 0;
 
-  function animate() {
+  function heroAnimate(ts) {
+    requestAnimationFrame(heroAnimate);
+    if (ts - lastHeroFrame < 32) return; // ~30fps cap
+    lastHeroFrame = ts;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     time += 0.012;
 
-    // Subtle radial glow behind tree
     const cx = canvas.width / 2;
     const cy = canvas.height * 0.5;
     const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.height * 0.55);
@@ -277,7 +304,6 @@ if (canvas) {
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw branches
     branches.forEach(b => {
       const pulse = Math.sin(time * 0.8 + b.depth * 0.5) * 0.3 + 0.7;
       const alpha = b.isRoot
@@ -292,26 +318,18 @@ if (canvas) {
 
       if (b.isRoot) {
         ctx.strokeStyle = `rgba(26, 127, 168, ${alpha * pulse})`;
-        ctx.shadowBlur = b.w * 1.5;
-        ctx.shadowColor = 'rgba(26, 127, 168, 0.3)';
       } else {
         const isJadeBranch = b.depth <= 3;
         ctx.strokeStyle = isJadeBranch
           ? `rgba(0, 200, 150, ${alpha * pulse})`
           : `rgba(77, 184, 212, ${alpha * pulse})`;
-        ctx.shadowBlur = b.w * 2;
-        ctx.shadowColor = isJadeBranch ? 'rgba(0, 200, 150, 0.2)' : 'rgba(77, 184, 212, 0.2)';
       }
-
       ctx.stroke();
-      ctx.shadowBlur = 0;
     });
 
-    // Spawn droplets
     dropletTimer++;
     if (dropletTimer > 28) { spawnDroplet(); dropletTimer = 0; }
 
-    // Update & draw droplets
     droplets = droplets.filter(d => d.opacity > 0.02);
     droplets.forEach(d => {
       d.trail.push({ x: d.x, y: d.y });
@@ -324,7 +342,6 @@ if (canvas) {
 
       if (d.y > canvas.height) { d.opacity = 0; return; }
 
-      // Trail
       d.trail.forEach((pt, i) => {
         const a = (i / d.trail.length) * d.opacity * 0.4;
         ctx.beginPath();
@@ -333,19 +350,14 @@ if (canvas) {
         ctx.fill();
       });
 
-      // Droplet head
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
       ctx.fillStyle = d.isJade
         ? `rgba(0,200,150,${d.opacity})`
         : `rgba(77,184,212,${d.opacity})`;
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = d.isJade ? '#00c896' : '#4db8d4';
       ctx.fill();
-      ctx.shadowBlur = 0;
     });
 
-    // Spawn & draw ambient particles
     particleTimer++;
     if (particleTimer > 12) { spawnParticle(); particleTimer = 0; }
 
@@ -360,17 +372,12 @@ if (canvas) {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fillStyle = p.isJade ? `rgba(0,200,150,${alpha})` : `rgba(77,184,212,${alpha})`;
-      ctx.shadowBlur = 4;
-      ctx.shadowColor = p.isJade ? '#00c896' : '#4db8d4';
       ctx.fill();
-      ctx.shadowBlur = 0;
     });
-
-    requestAnimationFrame(animate);
   }
 
   resize();
-  animate();
+  requestAnimationFrame(heroAnimate);
   window.addEventListener('resize', resize);
 }
 
@@ -381,7 +388,7 @@ if (canvas) {
   if (!svg || !div) return;
 
   function resize() {
-    div.style.height = '0'; // collapse first so SVG doesn't inflate the measurement
+    div.style.height = '0';
     const pageH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
     const pageW = window.innerWidth || 1;
     div.style.height = pageH + 'px';
@@ -415,18 +422,15 @@ nav?.addEventListener('mouseenter', showNav);
 nav?.addEventListener('mouseleave', hideNav);
 navTrigger?.addEventListener('mouseleave', hideNav);
 
-// Also show on scroll to top
 window.addEventListener('scroll', () => {
   if (window.scrollY < 10) showNav();
 });
 
-// Mobile toggle
 document.querySelector('.nav-toggle')?.addEventListener('click', () => {
   document.querySelector('.nav-links')?.classList.toggle('open');
   showNav();
 });
 
-// Active link
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-links a').forEach(link => {
   if (link.getAttribute('href') === currentPage) link.classList.add('active');
